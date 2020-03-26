@@ -1,0 +1,55 @@
+import React, { Component } from "react";
+
+import Header from "../header";
+import RandomPlanet from "../random-planet";
+import ItemList from "../item-list";
+import PersonDetails from "../person-details";
+
+import "./app.css";
+
+export default class App extends Component {
+  state = {
+    showPlanet: true,
+    selectedPerson: null
+  };
+
+  onTogglePlanet = () => {
+    this.setState(({ showPlanet }) => {
+      return { showPlanet: !showPlanet };
+    });
+  };
+
+  onPersonSelected = id => {
+    console.log(id);
+    this.setState({ selectedPerson: id });
+  };
+
+  render() {
+    const { showPlanet, selectedPerson } = this.state;
+    const content = showPlanet ? <RandomPlanet /> : null;
+    const buttonName = showPlanet ? "Hide Planet" : "Show Planet";
+
+    return (
+      <div className="stardb-app">
+        <Header />
+        {content}
+        <button
+          type="button"
+          className="toggle-planet btn btn-warning btn-lg"
+          onClick={this.onTogglePlanet}
+        >
+          {buttonName}
+        </button>
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList onItemSelected={this.onPersonSelected} />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={selectedPerson} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+}

@@ -2,6 +2,8 @@
 
 It is worked application made in 08/03/2020
 
+<img src="../to-do/img/main_view.png" width="400" height="380"/>
+
 ## To start application
 Run in terminal next command
 ```batch

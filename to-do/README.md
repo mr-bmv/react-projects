@@ -9,7 +9,7 @@ It is worked application made in 08/03/2020
   - [Add new Item](#add-new-item)
   - [Filter Items](#filter-items)
 
-<img src="../to-do/img/main_view.png" width="400" height="380"/>
+<img src="../img/toDo_main_view.png" width="400" height="380"/>
 
 This application created for practice some features of React.
 

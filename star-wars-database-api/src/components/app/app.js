@@ -27,7 +27,7 @@ export default class App extends Component {
   render() {
     const { showPlanet, selectedPerson } = this.state;
     const content = showPlanet ? <RandomPlanet /> : null;
-    const buttonName = showPlanet ? "Hide Planet" : "Show Planet";
+    const buttonName = showPlanet ? "Hide Random Planet" : "Show Random Planet";
 
     return (
       <div className="stardb-app">

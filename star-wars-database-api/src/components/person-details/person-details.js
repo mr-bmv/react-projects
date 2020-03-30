@@ -75,6 +75,22 @@ export default class PersonDetails extends Component {
               <span className="term">Eye Color</span>
               <span>{eyeColor}</span>
             </li>
+            <li className="list-group-item">
+              <span className="term">Height</span>
+              <span>{height}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Mass</span>
+              <span>{mass}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Hair Color</span>
+              <span>{hairColor}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Skin Color</span>
+              <span>{skinColor}</span>
+            </li>
           </ul>
         </div>
       </div>

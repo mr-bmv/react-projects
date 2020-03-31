@@ -4,14 +4,16 @@ import Header from "../header";
 import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
 import PersonDetails from "../person-details";
+import ErrorButton from "../error-button";
+import ErrorIndicator from "../error-indicator";
 
 import "./app.css";
-import ErrorButton from "../error-button";
 
 export default class App extends Component {
   state = {
     showPlanet: true,
-    selectedPerson: null
+    selectedPerson: null,
+    hasError: false
   };
 
   onTogglePlanet = () => {
@@ -24,7 +26,15 @@ export default class App extends Component {
     this.setState({ selectedPerson: id });
   };
 
+  componentDidCatch = () => {
+    this.setState({ hasError: true });
+  };
+
   render() {
+    if (this.state.hasError) {
+      return <ErrorIndicator />;
+    }
+
     const { showPlanet, selectedPerson } = this.state;
     const content = showPlanet ? <RandomPlanet /> : null;
     const buttonName = showPlanet ? "Hide Random Planet" : "Show Random Planet";

@@ -6,6 +6,7 @@ import ItemList from "../item-list";
 import PersonDetails from "../person-details";
 
 import "./app.css";
+import ErrorButton from "../error-button";
 
 export default class App extends Component {
   state = {
@@ -32,13 +33,17 @@ export default class App extends Component {
       <div className="stardb-app">
         <Header />
         {content}
-        <button
-          type="button"
-          className="toggle-planet btn btn-warning btn-lg"
-          onClick={this.onTogglePlanet}
-        >
-          {buttonName}
-        </button>
+
+        <div className="row mb2 button-row">
+          <button
+            type="button"
+            className="toggle-planet btn btn-warning btn-lg"
+            onClick={this.onTogglePlanet}
+          >
+            {buttonName}
+          </button>
+          <ErrorButton />
+        </div>
 
         <div className="row mb2">
           <div className="col-md-6">

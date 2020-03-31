@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./person-details.css";
 import SwapiService from "../../services/swapi-services";
 import Spinner from "../spinner";
+import ErrorButton from "../error-button";
 
 export default class PersonDetails extends Component {
   swapiService = new SwapiService();
@@ -18,7 +19,7 @@ export default class PersonDetails extends Component {
 
   componentDidUpdate = prevProps => {
     if (this.props.personId !== prevProps.personId) {
-      this.setState({loading:true})
+      this.setState({ loading: true });
       this.updatePerson();
     }
   };
@@ -32,7 +33,7 @@ export default class PersonDetails extends Component {
     this.swapiService.getPerson(personId).then(person => {
       this.setState({ person, loading: false });
     });
-  }
+  };
 
   render() {
     if (!this.state.person) {
@@ -98,6 +99,7 @@ const Content = ({ person }) => {
             <span>{skinColor}</span>
           </li>
         </ul>
+        <ErrorButton />
       </div>
     </React.Fragment>
   );

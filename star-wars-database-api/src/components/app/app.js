@@ -2,10 +2,9 @@ import React, { Component } from "react";
 
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-import ItemList from "../item-list";
-import PersonDetails from "../person-details";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
+import PeoplePage from "../people-page/people-page";
 
 import "./app.css";
 
@@ -20,10 +19,6 @@ export default class App extends Component {
     this.setState(({ showPlanet }) => {
       return { showPlanet: !showPlanet };
     });
-  };
-
-  onPersonSelected = id => {
-    this.setState({ selectedPerson: id });
   };
 
   componentDidCatch = () => {
@@ -55,14 +50,7 @@ export default class App extends Component {
           <ErrorButton />
         </div>
 
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected} />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={selectedPerson} />
-          </div>
-        </div>
+        <PeoplePage />
       </div>
     );
   }

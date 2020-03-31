@@ -38,9 +38,6 @@ export default class PersonDetails extends Component {
     if (!this.state.person) {
       return <span>Select any person, please</span>;
     }
-
-    const { personId } = this.props;
-    console.log("render click on ", personId);
     const { person, loading } = this.state;
 
     const content = !loading ? <Content person={person} /> : <Spinner />;

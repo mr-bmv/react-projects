@@ -9,7 +9,7 @@ const ErrorIndicator = () => {
       <img src={icon} width="70" height="70" alt="error icon" />
       <span className="boom">BOOM!</span>
       <span>something has gone terribly wrong</span>
-      <span>(but  I  already sent droids to fix it) </span>
+      <span>(but I've already sent droids to fix it) </span>
     </div>
   );
 };

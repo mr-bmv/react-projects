@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
+import SwapiService from "../../services/swapi-services";
 import Header from "../header";
 import RandomPlanet from "../random-planet";
 import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import PeoplePage from "../people-page/people-page";
+import ItemList from "../item-list";
 
 import "./app.css";
 
@@ -14,6 +16,8 @@ export default class App extends Component {
     selectedPerson: null,
     hasError: false
   };
+
+  swapiService = new SwapiService();
 
   onTogglePlanet = () => {
     this.setState(({ showPlanet }) => {
@@ -51,6 +55,18 @@ export default class App extends Component {
         </div>
 
         <PeoplePage />
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList getData={this.swapiService.getAllPlanets} />
+          </div>
+        </div>
+
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList getData={this.swapiService.getAllStarShips} />
+          </div>
+        </div>
       </div>
     );
   }

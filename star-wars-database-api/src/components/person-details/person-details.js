@@ -99,7 +99,7 @@ const Content = ({ person }) => {
             <span>{skinColor}</span>
           </li>
         </ul>
-        <ErrorButton />
+        <div className='btn'><ErrorButton /></div>        
       </div>
     </React.Fragment>
   );

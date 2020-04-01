@@ -21,7 +21,7 @@ export default class ItemList extends Component {
     );
   };
 
-  renderPersons = () => {
+  renderItem = () => {
     const { List } = this.state;
     if (!List) {
       return <Spinner />;
@@ -40,7 +40,7 @@ export default class ItemList extends Component {
   };
 
   render() {
-    const person = this.renderPersons();
+    const person = this.renderItem();
     return <ul className="item-list list-group">{person}</ul>;
   }
 }

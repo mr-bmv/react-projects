@@ -34,7 +34,7 @@ export default class App extends Component {
       return <ErrorIndicator />;
     }
 
-    const { showPlanet, selectedPerson } = this.state;
+    const { showPlanet } = this.state;
     const content = showPlanet ? <RandomPlanet /> : null;
     const buttonName = showPlanet ? "Hide Random Planet" : "Show Random Planet";
 

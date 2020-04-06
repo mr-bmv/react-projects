@@ -8,25 +8,25 @@ export default class ItemList extends Component {
   swapiService = new SwapiService();
 
   state = {
-    List: null
+    itemList: null
   };
 
   componentDidMount = () => {
     const { getData } = this.props;
 
-    getData().then(List =>
+    getData().then(itemList =>
       this.setState({
-        List
+        itemList
       })
     );
   };
 
   renderItem = () => {
-    const { List } = this.state;
-    if (!List) {
+    const { itemList } = this.state;
+    if (!itemList) {
       return <Spinner />;
     }
-    return List.map(({ id, name }) => {
+    return itemList.map(({ id, name }) => {
       return (
         <li
           key={id}

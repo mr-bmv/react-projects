@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
+import Layout from "./hoc/Layout/layout";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello react</h1>
-    </div>
+    <Layout>
+      <div style={{ width: 400, border: "1px solid black" }}>
+        <h1> Layout works</h1>
+      </div>
+    </Layout>
   );
 }
 

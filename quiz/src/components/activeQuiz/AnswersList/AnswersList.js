@@ -1,12 +1,17 @@
 import React from "react";
-import classes from "./AnswersList.css";
 import AnswerItem from "./AnswerItem/AnswerItem";
 
-const AnswersList = (props) => {
+const AnswersList = ({ answers, onAnswer }) => {
   return (
     <ul className="answers-list">
-      {props.answers.map((answer, index) => {
-        return <AnswerItem key={index} answer={answer} />;
+      {answers.map((answer) => {
+        return (
+          <AnswerItem
+            key={answer.id}
+            answer={answer}
+            onAnswer={() => onAnswer(answer.id)}
+          />
+        );
       })}
     </ul>
   );

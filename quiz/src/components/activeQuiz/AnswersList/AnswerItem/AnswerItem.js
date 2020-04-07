@@ -1,14 +1,11 @@
-import React from 'react'
-import classes from './AnswerItem.css'
+import React from "react";
 
-const AnswerItem = props => {
+const AnswerItem = ({ answer, onAnswer }) => {
   return (
-    <li
-      className='answer-item'
-    >
-      { props.answer.text }
+    <li className="answer-item" onClick={onAnswer}>
+      {answer.text}
     </li>
-  )
-}
+  );
+};
 
-export default AnswerItem
+export default AnswerItem;

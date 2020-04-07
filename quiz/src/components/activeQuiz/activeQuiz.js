@@ -2,16 +2,24 @@ import React from "react";
 import "./activeQuiz.css";
 import AnswersList from "./AnswersList/AnswersList";
 
-const ActiveQuiz = ({ answers }) => {
+const ActiveQuiz = ({
+  question,
+  answers,
+  onAnswer,
+  quizLength,
+  questionNumber,
+}) => {
   return (
     <div className="active-quiz">
       <p className="question">
         <span>
-          <strong> 2. </strong>&nbsp; ?Question here?
+          <strong> {questionNumber}. </strong>&nbsp; {question}
         </span>
-        <small>4 from 13</small>
+        <small>
+          {questionNumber} from {quizLength}
+        </small>
       </p>
-      <AnswersList answers={answers} />
+      <AnswersList answers={answers} onAnswer={onAnswer} />
     </div>
   );
 };

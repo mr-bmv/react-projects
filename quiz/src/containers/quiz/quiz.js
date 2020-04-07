@@ -37,16 +37,17 @@ export default class Quiz extends Component {
   };
 
   render() {
+    const { quiz, activeQuestion } = this.state;
     return (
       <div className="quiz">
         <div className="quiz-wrapper">
           <h1>Try pass the Quiz</h1>
           <ActiveQuiz
-            answers={this.state.quiz[this.state.activeQuestion].answers}
-            question={this.state.quiz[this.state.activeQuestion].question}
+            answers={quiz[activeQuestion].answers}
+            question={quiz[activeQuestion].question}
             onAnswer={this.onAnswerClickHandler}
             quizLength={this.state.quiz.length}
-            questionNumber={this.state.activeQuestion + 1}
+            questionNumber={activeQuestion + 1}
           />
         </div>
       </div>

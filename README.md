@@ -9,9 +9,9 @@ it's just two projects:
 **Contents:**
 
 - [React Projects](#react-projects)
+  - [Quiz Application](#quiz-application)
   - [toDo List Application](#todo-list-application)
   - [Star Wars Database Application](#star-wars-database-application)
-  - [Quiz Application](#quiz-application)
 
 TODO
 themes for bootstrap <https://bootswatch.com/>
@@ -25,7 +25,6 @@ icon created by <https://www.iconspedia.com/>
 ## Quiz Application
 
 TODO
-
 
 ## toDo List Application
 

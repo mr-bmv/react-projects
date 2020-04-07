@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./quiz.css";
+import ActiveQuiz from "../../components/activeQuiz/activeQuiz";
 
 export default class Quiz extends Component {
   state = {
@@ -8,7 +9,10 @@ export default class Quiz extends Component {
   render() {
     return (
       <div className="quiz">
-        <h1>Quiz</h1>
+        <div className="quiz-wrapper">
+          <h1>Quiz</h1>
+          <ActiveQuiz />
+        </div>
       </div>
     );
   }

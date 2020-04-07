@@ -1,0 +1,13 @@
+.quiz {
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  flex-grow: 1;
+  width: 100%;
+  background-color: #fff;
+}
+
+.quiz h1 {
+  color: #2fa4e7;
+  margin-left: 10px;
+}

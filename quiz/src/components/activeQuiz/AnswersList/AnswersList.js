@@ -1,5 +1,6 @@
 import React from "react";
 import AnswerItem from "./AnswerItem/AnswerItem";
+import "./AnswersList.css";
 
 const AnswersList = ({ answers, onAnswer }) => {
   return (

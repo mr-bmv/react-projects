@@ -41,7 +41,7 @@ export default class Quiz extends Component {
     return (
       <div className="quiz">
         <div className="quiz-wrapper">
-          <h1>Try pass the Quiz</h1>
+          <h1>Try to pass The Quiz</h1>
           <ActiveQuiz
             answers={quiz[activeQuestion].answers}
             question={quiz[activeQuestion].question}

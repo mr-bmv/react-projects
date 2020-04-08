@@ -8,6 +8,7 @@ const ActiveQuiz = ({
   onAnswer,
   quizLength,
   questionNumber,
+  answerResult,
 }) => {
   return (
     <div className="active-quiz">
@@ -19,7 +20,11 @@ const ActiveQuiz = ({
           {questionNumber} from {quizLength}
         </small>
       </p>
-      <AnswersList answers={answers} onAnswer={onAnswer} />
+      <AnswersList
+        answers={answers}
+        onAnswer={onAnswer}
+        answerResult={answerResult}
+      />
     </div>
   );
 };

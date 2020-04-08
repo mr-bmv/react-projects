@@ -1,9 +1,14 @@
 import React from "react";
-import './AnswerItem.css'
+import "./AnswerItem.css";
 
-const AnswerItem = ({ answer, onAnswer }) => {
+const AnswerItem = ({ answer, onAnswer, answerResult }) => {
+  let style = "answer-item ";
+  if (answerResult) {
+    style = style + answerResult;
+    console.log(style);
+  }
   return (
-    <li className="answer-item" onClick={onAnswer}>
+    <li className={style} onClick={onAnswer}>
       {answer.text}
     </li>
   );

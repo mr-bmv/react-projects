@@ -27,17 +27,35 @@ export default class Quiz extends Component {
         ],
       },
     ],
+    answerResult: null,
   };
 
   onAnswerClickHandler = (id) => {
-    console.log(id);
-    this.setState(({ activeQuestion }) => {
-      return { activeQuestion: activeQuestion + 1 };
-    });
+    const question = this.state.quiz[this.state.activeQuestion];
+    if (question.rightAnswer === id) {
+      this.setState({ answerResult: { [id]: "success" } });
+
+      const timeout = window.setTimeout(() => {
+        if (this.isQuizFinished()) {
+          console.log("Finished");
+        } else {
+          this.setState(({ activeQuestion }) => {
+            return { activeQuestion: activeQuestion + 1, answerResult: null };
+          });
+        }
+        window.clearTimeout(timeout);
+      }, 1500);
+    } else {
+      this.setState({ answerResult: { [id]: "error" } });
+    }
+  };
+
+  isQuizFinished = () => {
+    return this.state.activeQuestion + 1 === this.state.quiz.length;
   };
 
   render() {
-    const { quiz, activeQuestion } = this.state;
+    const { quiz, activeQuestion, answerResult } = this.state;
     return (
       <div className="quiz">
         <div className="quiz-wrapper">
@@ -46,8 +64,9 @@ export default class Quiz extends Component {
             answers={quiz[activeQuestion].answers}
             question={quiz[activeQuestion].question}
             onAnswer={this.onAnswerClickHandler}
-            quizLength={this.state.quiz.length}
+            quizLength={quiz.length}
             questionNumber={activeQuestion + 1}
+            answerResult={answerResult}
           />
         </div>
       </div>

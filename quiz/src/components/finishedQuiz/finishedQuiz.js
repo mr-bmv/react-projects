@@ -1,24 +1,36 @@
 import React from "react";
 import "./finishedQuiz.css";
+import Quiz from "../../containers/quiz/quiz";
 
-const FinishedQuiz = () => {
+const FinishedQuiz = ({ result, quiz, reTry }) => {
+  const rightAnswers = Object.values(result).filter(
+    (item) => item === "success"
+  ).length;
   return (
     <div className="finished-quiz">
       <ul>
-        <li>
-          <strong>1</strong>
-          How are you
-          <i className="fa fa-times error" />
-        </li>
-        <li>
-          <strong>1</strong>
-          How are you
-          <i className="fa fa-check success" />
-        </li>
+        {quiz.map((quizItem) => {
+          const style = "fa ";
+          const cls =
+            result[quizItem.id] === "error"
+              ? "fa-times error"
+              : "fa-check success";
+          return (
+            <li key={quizItem.id}>
+              <strong>{quizItem.id}.</strong>&nbsp;
+              {quizItem.question}
+              <i className={style + cls} />
+            </li>
+          );
+        })}
       </ul>
-      <p>Correct 4 from 10</p>
+      <p>
+        Correct {rightAnswers} from {quiz.length}
+      </p>
 
-      <button>Try again</button>
+      <button onClick={reTry}>
+        Try again
+      </button>
     </div>
   );
 };

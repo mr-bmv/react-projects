@@ -1,6 +1,7 @@
 import React from "react";
 import "./finishedQuiz.css";
 import Quiz from "../../containers/quiz/quiz";
+import Button from "../UI/button/button";
 
 const FinishedQuiz = ({ result, quiz, reTry }) => {
   const rightAnswers = Object.values(result).filter(
@@ -28,9 +29,13 @@ const FinishedQuiz = ({ result, quiz, reTry }) => {
         Correct {rightAnswers} from {quiz.length}
       </p>
 
-      <button onClick={reTry}>
-        Try again
-      </button>
+      <Button onClick={reTry}>Retry</Button>
+      <Button onClick={reTry} type="success">
+        Success
+      </Button>
+      <Button onClick={reTry} type="error">
+        Error
+      </Button>
     </div>
   );
 };

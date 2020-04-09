@@ -1,6 +1,7 @@
 import React from "react";
 import "./activeQuiz.css";
 import AnswersList from "./AnswersList/AnswersList";
+import Button from "../UI/button/button";
 
 const ActiveQuiz = ({
   question,

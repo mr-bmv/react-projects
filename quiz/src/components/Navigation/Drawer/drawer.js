@@ -1,9 +1,10 @@
 import React from "react";
 import "./drawer.css";
+import Backdrop from "../../UI/BackDrop/BackDrop";
 
 const links = [1, 2, 3];
 
-const Drawer = ({ isOpen }) => {
+const Drawer = ({ isOpen, onClose }) => {
   const cls = isOpen ? "drawer" : "drawer close";
 
   const renderLinks = () => {
@@ -17,9 +18,12 @@ const Drawer = ({ isOpen }) => {
   };
 
   return (
-    <nav className={cls}>
-      <ul>{renderLinks()}</ul>
-    </nav>
+    <React.Fragment>
+      <nav className={cls}>
+        <ul>{renderLinks()}</ul>
+      </nav>
+      {isOpen ? <Backdrop onClick={onClose} /> : null}
+    </React.Fragment>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./drawer.css";
+import "./drawer.css";
 
 const links = [1, 2, 3];
 

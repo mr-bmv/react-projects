@@ -1,6 +1,5 @@
 import React from "react";
 import "./finishedQuiz.css";
-import Quiz from "../../containers/quiz/quiz";
 import Button from "../UI/button/button";
 
 const FinishedQuiz = ({ result, quiz, reTry }) => {

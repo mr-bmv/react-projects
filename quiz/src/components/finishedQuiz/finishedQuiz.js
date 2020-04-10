@@ -29,7 +29,9 @@ const FinishedQuiz = ({ result, quiz, reTry }) => {
         Correct {rightAnswers} from {quiz.length}
       </p>
 
-      <Button onClick={reTry}>Retry</Button>
+      <Button onClick={reTry}>
+        Retry
+      </Button>
       <Button onClick={reTry} type="success">
         Success
       </Button>

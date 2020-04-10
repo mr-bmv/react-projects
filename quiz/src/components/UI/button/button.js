@@ -1,17 +1,16 @@
 import React from "react";
-import "./button.css";
+import classes from "./button.module.css";
 
-const Button = ({ onClick, children, type, disabled }) => {
-  let cls = "button";
-  if (type) {
-    cls = cls + `-${type}`;
-  }
-  console.log(cls);
-  console.log({ type });
+const Button = ({ type, onClick, disabled, children }) => {
+  const cls = type
+    ? [classes.button, classes[type]]
+    : [classes.button, classes["primary"]];
+
   return (
-    <button onClick={onClick} className={cls} disabled={disabled}>
+    <button onClick={onClick} className={cls.join(" ")} disabled={disabled}>
       {children}
     </button>
   );
 };
+
 export default Button;

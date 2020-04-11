@@ -8,7 +8,8 @@
   padding: 20px 10px;
   box-sizing: border-box;
   background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
-  transform: translateX(0px);
+  /* background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+  transform: translateX(0px); */
   transition: transform 0.3s ease-in;
   z-index: 90;
 }
@@ -29,7 +30,8 @@
 
 .drawer ul li a {
   /* color: #ffffff; */
-  color: #033c73;
+  /* color: #033c73; */
+  color: #ffffff;
   font-size: 30px;
   text-decoration: none;
   position: relative;
@@ -37,9 +39,16 @@
   transition: opacity 0.3s;
 }
 
-.drawer ul li a:hover,
-.active {
-  /* opacity: 0.3; */
+.drawer ul li a:hover {
+  opacity: 0.5;
   /* color: #033c73; */
   color: #ffffff;
+}
+
+.drawer ul li a.active {
+  /* opacity: 0.3; */
+  color: #033c73;
+  /* color: #ffffff; */
+  /* color: #54b4eb; */
+  /* font-weight: bold; */
 }

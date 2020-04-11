@@ -1,17 +1,33 @@
 import React from "react";
-import "./drawer.css";
+import classes from "./drawer.module.css";
 import Backdrop from "../../UI/BackDrop/BackDrop";
+import { NavLink } from "react-router-dom";
 
-const links = [1, 2, 3];
+const links = [
+  { id: 1, path: "/", label: "Home Page", exact: true },
+  { id: 2, path: "/auth", label: "Log In", exact: false },
+  { id: 3, path: "/quiz-creator", label: "Creat New Quiz", exact: false },
+];
 
 const Drawer = ({ isOpen, onClose }) => {
-  const cls = isOpen ? "drawer" : "drawer close";
+  const cls = [classes.drawer];
+
+  if (!isOpen) {
+    cls.push(classes.close);
+  }
 
   const renderLinks = () => {
-    return links.map((link, index) => {
+    return links.map(({ id, path, label, exact }) => {
       return (
-        <li key={index}>
-          <a>Link {link}</a>
+        <li key={id}>
+          <NavLink
+            to={path}
+            exact={exact}
+            activeClassName={classes.active}
+            onClick={onClose}
+          >
+            {label}
+          </NavLink>
         </li>
       );
     });
@@ -19,7 +35,7 @@ const Drawer = ({ isOpen, onClose }) => {
 
   return (
     <React.Fragment>
-      <nav className={cls}>
+      <nav className={cls.join(" ")}>
         <ul>{renderLinks()}</ul>
       </nav>
       {isOpen ? <Backdrop onClick={onClose} /> : null}

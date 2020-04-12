@@ -1,11 +1,13 @@
 import React from "react";
 import "./finishedQuiz.css";
 import Button from "../UI/button/button";
+import { Link } from "react-router-dom";
 
 const FinishedQuiz = ({ result, quiz, reTry }) => {
   const rightAnswers = Object.values(result).filter(
     (item) => item === "success"
   ).length;
+
   return (
     <div className="finished-quiz">
       <ul>
@@ -28,15 +30,14 @@ const FinishedQuiz = ({ result, quiz, reTry }) => {
         Correct {rightAnswers} from {quiz.length}
       </p>
 
-      <Button onClick={reTry}>
-        Retry
-      </Button>
-      <Button onClick={reTry} type="success">
-        Success
-      </Button>
-      <Button onClick={reTry} type="error">
+      <Button onClick={reTry}>Retry</Button>
+      <Link to="/">
+        <Button type="success">Quiz List</Button>
+      </Link>
+
+      {/* <Button onClick={reTry} type="error">
         Error
-      </Button>
+      </Button> */}
     </div>
   );
 };

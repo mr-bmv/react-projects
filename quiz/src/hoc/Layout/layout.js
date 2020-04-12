@@ -13,6 +13,7 @@ export default class Layout extends Component {
       menu: !this.state.menu,
     });
   };
+
   render() {
     return (
       <div className={classes.layout}>

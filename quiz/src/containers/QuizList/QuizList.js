@@ -26,7 +26,6 @@ export default class QuizList extends Component {
               borderRadius: "10px",
               margin: "0 10px",
               boxSizing: "border-box",
-              // backgroundColor: "#b6d298",
               backgroundImage: "linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5)",
             }}
           >

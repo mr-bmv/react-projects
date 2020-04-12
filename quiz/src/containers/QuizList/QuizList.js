@@ -9,7 +9,7 @@ export default class QuizList extends Component {
     return this.tests.map((quiz, index) => {
       return (
         <li key={index}>
-          <NavLink to={"/quiz/" + quiz}>{quiz}</NavLink>
+          <NavLink to={"/quiz/" + quiz}>Quiz №{quiz}</NavLink>
         </li>
       );
     });
@@ -26,13 +26,14 @@ export default class QuizList extends Component {
               borderRadius: "10px",
               margin: "0 10px",
               boxSizing: "border-box",
-              backgroundColor: "#b6d298",
+              // backgroundColor: "#b6d298",
+              backgroundImage: "linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5)",
             }}
           >
             <span>List of Tests:</span>
-            <nav>
-              <ul>{this.renderList()}</ul>
-            </nav>
+            {/* <nav> */}
+            <ul>{this.renderList()}</ul>
+            {/* </nav> */}
           </div>
         </div>
       </div>

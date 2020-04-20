@@ -4,7 +4,7 @@
   padding-top: 100px;
   flex-grow: 1;
   width: 100%;
-  background: rosybrown;
+  background: #ffff;
 }
 
 .AuthWrapper {
@@ -14,13 +14,12 @@
 }
 
 .Auth h1 {
-  color: royalblue;
+  color: #54b4eb;
   text-align: center;
 }
 
 .AuthForm {
-  background: salmon;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  background-color: #c5e6f8;
   padding: 15px;
   border-radius: 5px;
 }

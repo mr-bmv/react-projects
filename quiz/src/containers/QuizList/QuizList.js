@@ -17,22 +17,11 @@ export default class QuizList extends Component {
   render() {
     return (
       <div className={classes.QuizList}>
-        <div style={{ width: "600px" }}>
+        <div className={classes.QuizListWrapper}>
           <h1>Choose your Quiz</h1>
-          <div
-            style={{
-              padding: "20px",
-              color: "#fff",
-              borderRadius: "10px",
-              margin: "0 10px",
-              boxSizing: "border-box",
-              backgroundImage: "linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5)",
-            }}
-          >
+          <div className={classes.QuizListInside}>
             <span>List of Tests:</span>
-            {/* <nav> */}
             <ul>{this.renderList()}</ul>
-            {/* </nav> */}
           </div>
         </div>
       </div>

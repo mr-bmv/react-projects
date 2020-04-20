@@ -10,6 +10,7 @@
 .quiz h1 {
   color: #2fa4e7;
   margin-left: 10px;
+  text-align: center;
 }
 
 .quiz-wrapper {

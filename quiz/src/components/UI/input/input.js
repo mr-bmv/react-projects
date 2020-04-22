@@ -19,7 +19,7 @@ const Input = ({
   const cls = [classes.Input];
   const htmlFor = `${inputType}-${Math.random()}`;
 
-  if (isInvalid({ valid, touched, shouldValidate })) {
+  if (isInvalid(valid, touched, shouldValidate)) {
     cls.push(classes.invalid);
   }
 
@@ -27,7 +27,7 @@ const Input = ({
     <div className={cls.join(" ")}>
       <label htmlFor={htmlFor}>{label}</label>
       <input type={inputType} id={htmlFor} value={value} onChange={onChange} />
-      {isInvalid({ valid, touched, shouldValidate }) ? (
+      {isInvalid(valid, touched, shouldValidate) ? (
         <span>{errorMessage || "Please, fill in the form correctly"}</span>
       ) : null}
     </div>

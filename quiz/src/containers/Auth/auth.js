@@ -4,12 +4,13 @@ import Button from "../../components/UI/button/button";
 import Input from "../../components/UI/input/input";
 
 const validateEmail = (email) => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
 export default class Auth extends Component {
   state = {
+    isFormValid: false,
     formControls: {
       email: {
         value: "",
@@ -37,6 +38,7 @@ export default class Auth extends Component {
       },
     },
   };
+
   loginHandler = () => {
     console.log("click-click");
   };
@@ -80,7 +82,13 @@ export default class Auth extends Component {
 
     formControls[credential] = control;
 
-    this.setState({ formControls });
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach((input) => {
+      isFormValid = formControls[input].valid && isFormValid;
+    });
+
+    this.setState({ formControls, isFormValid });
   };
 
   renderInputs = () => {
@@ -111,10 +119,18 @@ export default class Auth extends Component {
             {/* <Input label="E-mail" />
             <Input label="Password" errorMessage="TEST" /> */}
             {this.renderInputs()}
-            <Button type="success" onClick={this.loginHandler}>
+            <Button
+              type="success"
+              onClick={this.loginHandler}
+              disabled={!this.state.isFormValid}
+            >
               Log In
             </Button>
-            <Button type="primary" onClick={this.regHandler}>
+            <Button
+              type="primary"
+              onClick={this.regHandler}
+              disabled={!this.state.isFormValid}
+            >
               Registration
             </Button>
           </form>

@@ -3,6 +3,11 @@ import classes from "./Auth.module.css";
 import Button from "../../components/UI/button/button";
 import Input from "../../components/UI/input/input";
 
+const validateEmail = (email) => {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
 export default class Auth extends Component {
   state = {
     formControls: {
@@ -22,7 +27,7 @@ export default class Auth extends Component {
         value: "",
         type: "password",
         label: "Password",
-        errorMessage: "Incorrect Password",
+        errorMessage: "Incorrect Password - minimal length 6 symbols",
         valid: false,
         touched: false,
         validation: {
@@ -44,8 +49,38 @@ export default class Auth extends Component {
     event.preventDefault();
   };
 
+  validateCredential = (value, rule) => {
+    if (!rule) {
+      return true;
+    }
+
+    let isValid = true;
+    if (rule.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+
+    if (rule.email) {
+      isValid = validateEmail(value) && isValid;
+    }
+
+    if (rule.minLength) {
+      isValid = value.trim().length >= rule.minLength && isValid;
+    }
+
+    return isValid;
+  };
+
   onChangeHandler = (event, credential) => {
-    console.log(event.target.value, "-", credential);
+    const formControls = { ...this.state.formControls };
+    const control = { ...formControls[credential] };
+
+    control.value = event.target.value;
+    control.touched = true;
+    control.valid = this.validateCredential(control.value, control.validation);
+
+    formControls[credential] = control;
+
+    this.setState({ formControls });
   };
 
   renderInputs = () => {

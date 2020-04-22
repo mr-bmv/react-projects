@@ -115,7 +115,7 @@ export default class Auth extends Component {
       <div className={classes.Auth}>
         <div className={classes.AuthWrapper}>
           <h1>Authorization</h1>
-          <form onSubmit={this.submitHandler} className={classes.AuthForm}>
+          <form onSubmit={this.submitHandler} >
             {/* <Input label="E-mail" />
             <Input label="Password" errorMessage="TEST" /> */}
             {this.renderInputs()}

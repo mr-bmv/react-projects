@@ -3,6 +3,7 @@ import Button from "./../../components/UI/button/button";
 import Input from "./../../components/UI/input/input";
 
 import classes from "./QuizCreator.module.css";
+import Select from "../../components/UI/select/select";
 
 export default class QuizCreator extends Component {
   createInput = (type, number = "") => {
@@ -29,13 +30,14 @@ export default class QuizCreator extends Component {
   state = {
     quiz: [],
     formControls: this.createFormControl(),
+    rightAnswerId: 1,
   };
 
   renderInputs = () => {
     return Object.keys(this.state.formControls).map((field, index) => {
       const control = this.state.formControls[field];
       return (
-        <React.Fragment>
+        <React.Fragment key={field + index}>
           <Input
             key={field + index}
             value={control.value}
@@ -66,7 +68,24 @@ export default class QuizCreator extends Component {
     console.log("Submit Test");
   };
 
+  selectChangeHandler = (event) => {
+    this.setState({ rightAnswerId: event.target.value });
+  };
+
   render() {
+    const select = (
+      <Select
+        label="Choose correct answer"
+        value={this.state.rightAnswerId}
+        onChange={this.selectChangeHandler}
+        options={[
+          { text: 1, value: 1 },
+          { text: 2, value: 2 },
+          { text: 3, value: 3 },
+          { text: 4, value: 4 },
+        ]}
+      />
+    );
     return (
       <div className={classes.QuizCreator}>
         <div>
@@ -74,8 +93,9 @@ export default class QuizCreator extends Component {
 
           <form onSubmit={this.submitHandler}>
             {this.renderInputs()}
+            <hr color="#54b4eb" />
 
-            <select></select>
+            {select}
 
             <Button type="primary" onClick={this.addQuestionHandler}>
               Add new Question

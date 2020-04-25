@@ -9,6 +9,7 @@ export default class QuizCreator extends Component {
   createInput = (type, number = "") => {
     return {
       label: `${type} ${number}`,
+      id: number,
       errorMessage: `${type} can't be empty`,
       value: "",
       valid: false,
@@ -19,7 +20,7 @@ export default class QuizCreator extends Component {
 
   createFormControl = () => {
     return {
-      question1: this.createInput("Question"),
+      question: this.createInput("Question"),
       answer1: this.createInput("Answer", 1),
       answer2: this.createInput("Answer", 2),
       answer3: this.createInput("Answer", 3),
@@ -31,6 +32,34 @@ export default class QuizCreator extends Component {
     quiz: [],
     formControls: this.createFormControl(),
     rightAnswerId: 1,
+    isFormValid: false,
+  };
+
+  validateField = (value, rule) => {
+    if (!rule) {
+      return true;
+    }
+
+    return value.trim().length > 0;
+  };
+
+  onChangeHandler = (value, field) => {
+    const formControls = { ...this.state.formControls };
+    const control = { ...formControls[field] };
+
+    control.value = value;
+    control.touched = true;
+    control.valid = this.validateField(control.value, control.validation);
+
+    formControls[field] = control;
+
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach((input) => {
+      isFormValid = formControls[input].valid && isFormValid;
+    });
+
+    this.setState({ formControls, isFormValid });
   };
 
   renderInputs = () => {
@@ -60,16 +89,45 @@ export default class QuizCreator extends Component {
     event.preventDefault();
   };
 
-  addQuestionHandler = () => {
-    console.log("Add new Test");
+  addQuestionHandler = (event) => {
+    event.preventDefault();
+    const {
+      formControls: { question, answer1, answer2, answer3, answer4 },
+      rightAnswerId,
+    } = this.state;
+
+    const quiz = [...this.state.quiz];
+
+    const index = quiz.length + 1;
+
+    const questionItem = {
+      question: question.value,
+      id: index,
+      answers: [
+        { text: answer1.value, id: answer1.id },
+        { text: answer2.value, id: answer2.id },
+        { text: answer3.value, id: answer3.id },
+        { text: answer4.value, id: answer4.id },
+      ],
+      rightAnswerId: rightAnswerId,
+    };
+
+    quiz.push(questionItem);
+
+    this.setState({
+      quiz,
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: this.createFormControl(),
+    });
   };
 
   createQuizHandler = () => {
-    console.log("Submit Test");
+    console.log(this.state.quiz);
   };
 
   selectChangeHandler = (event) => {
-    this.setState({ rightAnswerId: event.target.value });
+    this.setState({ rightAnswerId: +event.target.value });
   };
 
   render() {
@@ -97,11 +155,19 @@ export default class QuizCreator extends Component {
 
             {select}
 
-            <Button type="primary" onClick={this.addQuestionHandler}>
+            <Button
+              type="primary"
+              onClick={this.addQuestionHandler}
+              disabled={!this.state.isFormValid}
+            >
               Add new Question
             </Button>
 
-            <Button type="success" onClick={this.createQuizHandler}>
+            <Button
+              type="success"
+              onClick={this.createQuizHandler}
+              disabled={this.state.quiz.length === 0}
+            >
               Submit Test
             </Button>
           </form>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import Button from "./../../components/UI/button/button";
 import Input from "./../../components/UI/input/input";
 
@@ -122,8 +123,31 @@ export default class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = () => {
+  createQuizHandler = async () => {
     console.log(this.state.quiz);
+    try {
+      await axios.post(
+        "https://react-quiz-37a08.firebaseio.com/tests.json",
+        this.state.quiz
+      );
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: this.createFormControl(),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    // if function not async (use callback function)
+    // axios
+    //   .post(
+    //     "https://react-quiz-37a08.firebaseio.com/tests.json",
+    //     this.state.quiz
+    //   )
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err));
   };
 
   selectChangeHandler = (event) => {

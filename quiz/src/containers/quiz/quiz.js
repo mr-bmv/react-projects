@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./quiz.css";
 import ActiveQuiz from "../../components/activeQuiz/activeQuiz";
 import FinishedQuiz from "../../components/finishedQuiz/finishedQuiz";
+import axios from "../../axios/axios-quiz";
+import Spinner from "../../components/UI/Spinner/spinner";
 
 export default class Quiz extends Component {
   state = {
@@ -9,36 +11,15 @@ export default class Quiz extends Component {
     activeQuestion: 0,
     answerResult: null,
     isFinished: false,
-    quiz: [
-      {
-        id: 1,
-        question: "First Question",
-        rightAnswer: 3,
-        answers: [
-          { text: "Answer 1", id: 1 },
-          { text: "Answer 2", id: 2 },
-          { text: "Answer 3", id: 3 },
-          { text: "Answer 4", id: 4 },
-        ],
-      },
-      {
-        id: 2,
-        question: "Second Question",
-        rightAnswer: 1,
-        answers: [
-          { text: "Answer 2-1", id: 1 },
-          { text: "Answer 2-2", id: 2 },
-          { text: "Answer 2-3", id: 3 },
-          { text: "Answer 2-4", id: 4 },
-        ],
-      },
-    ],
+    quiz: [],
+    loading: true,
   };
 
   onAnswerClickHandler = (id) => {
     // there is a setTimeout here and if we will click double time on correct
     // answer we will select answer from next question. To prevent it
     // we need to check
+    console.log(id);
     if (this.state.answerResult) {
       const key = Object.keys(this.state.answerResult)[0];
       if (this.state.answerResult[key] === "success") {
@@ -50,8 +31,7 @@ export default class Quiz extends Component {
     // TODO
     // STRANGE SOLUTION LOOKS ON IT LATER
     const result = this.state.quizResult;
-
-    if (question.rightAnswer === id) {
+    if (question.rightAnswerId === id) {
       if (!result[question.id]) {
         result[question.id] = "success";
       }
@@ -84,9 +64,21 @@ export default class Quiz extends Component {
     return this.state.activeQuestion + 1 === this.state.quiz.length;
   };
 
-  componentDidMount = () => {
-    console.log(this.props.match.params.id);
-  };
+  async componentDidMount() {
+    try {
+      const response = await axios.get(
+        `/tests/${this.props.match.params.id}.json`
+      );
+      const quiz = response.data;
+
+      this.setState({
+        quiz,
+        loading: false,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   onRetryHandler = () => {
     this.setState({
@@ -104,14 +96,16 @@ export default class Quiz extends Component {
       answerResult,
       isFinished,
       result,
+      loading,
     } = this.state;
 
     return (
       <div className="quiz">
         <div className="quiz-wrapper">
           <h1>Try to pass The Quiz</h1>
-
-          {isFinished ? (
+          {loading ? (
+            <Spinner />
+          ) : isFinished ? (
             <FinishedQuiz
               result={result}
               quiz={quiz}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import axios from "../../axios/axios-quiz";
 import Button from "./../../components/UI/button/button";
 import Input from "./../../components/UI/input/input";
 
@@ -128,7 +128,8 @@ export default class QuizCreator extends Component {
     console.log(this.state.quiz);
     try {
       await axios.post(
-        "https://react-quiz-37a08.firebaseio.com/tests.json",
+        // "https://react-quiz-37a08.firebaseio.com/tests.json",
+        "tests.json",
         this.state.quiz
       );
       this.setState({

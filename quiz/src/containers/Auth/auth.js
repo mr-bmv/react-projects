@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import axios from "axios";
+
 import classes from "./Auth.module.css";
+
+// components
 import Button from "../../components/UI/button/button";
 import Input from "../../components/UI/input/input";
 
@@ -39,12 +43,48 @@ export default class Auth extends Component {
     },
   };
 
-  loginHandler = () => {
+  loginHandler = async () => {
     console.log("click-click");
+    // take from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
+    // except API_KEY need to add info from Setting of your project. Go to your firebase Setting and choose " API for WEB App"
+    // returnSecureToken - parameter which is required by firebase
+
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAP1VZN1fKWhEh-eeWISrOeBpK7oaOVKCs",
+        authData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  regHandler = () => {
+  registerHandler = async () => {
     console.log("reg");
+    // take from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
+    // except API_KEY need to add info from Setting of your project. Go to your firebase Setting and choose " API for WEB App"
+    // returnSecureToken - parameter which is required by firebase
+
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    };
+    try {
+      const response = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAP1VZN1fKWhEh-eeWISrOeBpK7oaOVKCs",
+        authData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   submitHandler = (event) => {
@@ -115,7 +155,7 @@ export default class Auth extends Component {
       <div className={classes.Auth}>
         <div className={classes.AuthWrapper}>
           <h1>Authorization</h1>
-          <form onSubmit={this.submitHandler} >
+          <form onSubmit={this.submitHandler}>
             {/* <Input label="E-mail" />
             <Input label="Password" errorMessage="TEST" /> */}
             {this.renderInputs()}
@@ -128,7 +168,7 @@ export default class Auth extends Component {
             </Button>
             <Button
               type="primary"
-              onClick={this.regHandler}
+              onClick={this.registerHandler}
               disabled={!this.state.isFormValid}
             >
               Registration

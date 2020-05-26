@@ -84,6 +84,10 @@ export default class Quiz extends Component {
     return this.state.activeQuestion + 1 === this.state.quiz.length;
   };
 
+  componentDidMount = () => {
+    console.log(this.props.match.params.id);
+  };
+
   onRetryHandler = () => {
     this.setState({
       quizResult: {},

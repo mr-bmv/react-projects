@@ -1,7 +1,7 @@
 export default class SwapiService {
-  _apiBase = "https://swapi.co/api";
+  _apiBase = "https://swapi.dev/api";
 
-  getResource = async url => {
+  getResource = async (url) => {
     const response = await fetch(`${this._apiBase}${url}`);
     if (!response.ok) {
       throw new Error(
@@ -12,11 +12,11 @@ export default class SwapiService {
   };
 
   getAllPeople = async () => {
-    const res = await this.getResource("/people/")
+    const res = await this.getResource("/people/");
     return res.results.map(this._transformPerson);
   };
 
-  getPerson = async id => {
+  getPerson = async (id) => {
     const person = await this.getResource(`/people/${id}`);
     return this._transformPerson(person);
   };
@@ -26,7 +26,7 @@ export default class SwapiService {
     return res.results.map(this._transformPlanet);
   };
 
-  getPlanet = async id => {
+  getPlanet = async (id) => {
     const planet = await this.getResource(`/planets/${id}`);
     return this._transformPlanet(planet);
   };
@@ -36,28 +36,28 @@ export default class SwapiService {
     return res.results.map(this._transformStarShip);
   };
 
-  getStarShip = async id => {
+  getStarShip = async (id) => {
     const starShip = await this.getResource(`/starships/${id}`);
     return this._transformStarShip(starShip);
   };
 
-  _extractId = obj => {
+  _extractId = (obj) => {
     const indxRegExp = /\/([0-9]*)\/$/; // https://regex101.com/
     const id = obj.url.match(indxRegExp)[1];
     return id;
   };
 
-  _transformPlanet = planet => {
+  _transformPlanet = (planet) => {
     return {
       id: this._extractId(planet),
       name: planet.name,
       population: planet.population,
       rotationPeriod: planet.rotation_period,
-      diameter: planet.diameter
+      diameter: planet.diameter,
     };
   };
 
-  _transformPerson = person => {
+  _transformPerson = (person) => {
     return {
       id: this._extractId(person),
       name: person.name,
@@ -67,11 +67,11 @@ export default class SwapiService {
       skinColor: person.skin_color,
       eyeColor: person.eye_color,
       birthYear: person.birth_year,
-      gender: person.gender
+      gender: person.gender,
     };
   };
 
-  _transformStarShip = starShip => {
+  _transformStarShip = (starShip) => {
     return {
       id: this._extractId(starShip),
       name: starShip.name,
@@ -79,7 +79,7 @@ export default class SwapiService {
       length: starShip.length,
       maxSpeed: starShip.max_atmosphering_speed,
       crew: starShip.crew,
-      cargoCapacity: starShip.cargo_capacity
+      cargoCapacity: starShip.cargo_capacity,
     };
   };
 }

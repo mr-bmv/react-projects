@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import "./App.module.css";
 import Counter from "./counter";
+import { add, sub, addNumber } from "./redux/action/action";
 
 class App extends Component {
   render() {
@@ -36,9 +37,9 @@ function mapStateToProps(state) {
 //
 function mapDispatchToProps(dispatch) {
   return {
-    onAdd: () => dispatch({ type: "ADD" }),
-    onSub: () => dispatch({ type: "SUB" }),
-    onAddNumber: (number) => dispatch({ type: "ADD_NUMBER", payload: number }),
+    onAdd: () => dispatch(add()),
+    onSub: () => dispatch(sub()),
+    onAddNumber: (number) => dispatch(addNumber(number)),
   };
 }
 

@@ -1,3 +1,4 @@
+// This is `redux` base template
 const redux = require("redux");
 
 const initialState = {
@@ -16,12 +17,11 @@ const reducer = (state = initialState, action) => {
 
 // Store
 const store = redux.createStore(reducer);
-store.subscribe( () => {
-    console.log('Subscribe', store.getState())
-})
+store.subscribe(() => {
+  console.log("Subscribe", store.getState());
+});
 
 // Actions
-
 const addCounter = {
   type: "ADD",
 };

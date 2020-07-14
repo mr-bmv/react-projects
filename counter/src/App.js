@@ -25,10 +25,11 @@ class App extends Component {
   }
 }
 
-// take state.counter form rootReducer
+// take state.counter form `rootReducer`
 function mapStateToProps(state) {
+  console.log("State OLD ", state);
   return {
-    counter: state.counter,
+    counter: state.counter1.counter,
   };
 }
 

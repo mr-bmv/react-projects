@@ -12,6 +12,7 @@ it's just two projects:
   - [Quiz Application](#quiz-application)
   - [toDo List Application](#todo-list-application)
   - [Star Wars Database Application](#star-wars-database-application)
+  - [redux structure](#redux-structure)
 
 TODO
 themes for bootstrap <https://bootswatch.com/>
@@ -37,3 +38,9 @@ TODO
 [More information about application](./star-wars-database-api/README.md)
 
 <img src="./img/swapi_main_view.png" width="800" height="500"/>
+
+## redux structure
+
+Main redux structure could be found in one [script](.\redux.js)
+
+Worked example of redux small application with async function could be found in small test [application](./counter/README.md)

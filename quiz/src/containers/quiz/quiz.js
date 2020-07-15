@@ -4,33 +4,27 @@ import ActiveQuiz from "../../components/activeQuiz/activeQuiz";
 import FinishedQuiz from "../../components/finishedQuiz/finishedQuiz";
 import axios from "../../axios/axios-quiz";
 import Spinner from "../../components/UI/Spinner/spinner";
+import { connect } from "react-redux";
+import { fetchQuizById } from "../../store/actions/tests";
 
-export default class Quiz extends Component {
-  state = {
-    quizResult: {},
-    activeQuestion: 0,
-    answerResult: null,
-    isFinished: false,
-    quiz: [],
-    loading: true,
-  };
+class Quiz extends Component {
 
   onAnswerClickHandler = (id) => {
     // there is a setTimeout here and if we will click double time on correct
     // answer we will select answer from next question. To prevent it
     // we need to check
     console.log(id);
-    if (this.state.answerResult) {
-      const key = Object.keys(this.state.answerResult)[0];
-      if (this.state.answerResult[key] === "success") {
+    if (this.props.answerResult) {
+      const key = Object.keys(this.props.answerResult)[0];
+      if (this.props.answerResult[key] === "success") {
         return;
       }
     }
-    const question = this.state.quiz[this.state.activeQuestion];
+    const question = this.props.quiz[this.props.activeQuestion];
 
     // TODO
     // STRANGE SOLUTION LOOKS ON IT LATER
-    const result = this.state.quizResult;
+    const result = this.props.quizResult;
     if (question.rightAnswerId === id) {
       if (!result[question.id]) {
         result[question.id] = "success";
@@ -61,23 +55,12 @@ export default class Quiz extends Component {
   };
 
   isQuizFinished = () => {
-    return this.state.activeQuestion + 1 === this.state.quiz.length;
+    return this.props.activeQuestion + 1 === this.props.quiz.length;
   };
 
   async componentDidMount() {
-    try {
-      const response = await axios.get(
-        `/tests/${this.props.match.params.id}.json`
-      );
-      const quiz = response.data;
-
-      this.setState({
-        quiz,
-        loading: false,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    console.log(this.props.match.params.id);
+    this.props.fetchQuizById(this.props.match.params.id)
   }
 
   onRetryHandler = () => {
@@ -97,13 +80,13 @@ export default class Quiz extends Component {
       isFinished,
       result,
       loading,
-    } = this.state;
+    } = this.props;
 
     return (
       <div className="quiz">
         <div className="quiz-wrapper">
           <h1>Try to pass The Quiz</h1>
-          {loading ? (
+          {loading || !quiz ? (
             <Spinner />
           ) : isFinished ? (
             <FinishedQuiz
@@ -112,17 +95,37 @@ export default class Quiz extends Component {
               reTry={this.onRetryHandler}
             />
           ) : (
-            <ActiveQuiz
-              answers={quiz[activeQuestion].answers}
-              question={quiz[activeQuestion].question}
-              onAnswer={this.onAnswerClickHandler}
-              quizLength={quiz.length}
-              questionNumber={activeQuestion + 1}
-              answerResult={answerResult}
-            />
-          )}
+                <ActiveQuiz
+                  answers={quiz[activeQuestion].answers}
+                  question={quiz[activeQuestion].question}
+                  onAnswer={this.onAnswerClickHandler}
+                  quizLength={quiz.length}
+                  questionNumber={activeQuestion + 1}
+                  answerResult={answerResult}
+                />
+              )}
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  const { quizResult, activeQuestion, answerResult, isFinished, quiz, loading } = state.quiz
+  return {
+    quizResult,
+    activeQuestion,
+    answerResult,
+    isFinished,
+    quiz,
+    loading
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchQuizById: (id) => dispatch(fetchQuizById(id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz)

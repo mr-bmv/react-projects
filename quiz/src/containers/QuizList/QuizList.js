@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import classes from "./QuizList.module.css";
 import { NavLink } from "react-router-dom";
-import axios from "../../axios/axios-quiz";
 import Spinner from "../../components/UI/Spinner/spinner";
+import { connect } from "react-redux";
+import { fetchQuizes } from "../../store/actions/tests";
 
-export default class QuizList extends Component {
-  state = {
-    tests: [],
-    loading: true,
-  };
+class QuizList extends Component {
 
   renderList = () => {
-    return this.state.tests.map(({ id, name }) => {
+    return this.props.tests.map(({ id, name }) => {
       return (
         <li key={id}>
           <NavLink to={"/quiz/" + id}>{name}</NavLink>
@@ -20,21 +17,8 @@ export default class QuizList extends Component {
     });
   };
 
-  componentDidMount = async () => {
-    try {
-      const response = await axios.get("tests.json");
-      console.log(response.data);
-      const test = [];
-      Object.keys(response.data).forEach((id, index) => {
-        test.push({
-          id,
-          name: `Test ${index + 1}`,
-        });
-      });
-      this.setState({ tests: test, loading: false });
-    } catch (error) {
-      console.error(error);
-    }
+  componentDidMount = () => {
+    this.props.fetchQuizes()
   };
 
   render() {
@@ -44,10 +28,27 @@ export default class QuizList extends Component {
           <h1>Choose your Quiz</h1>
           <div className={classes.QuizListInside}>
             <span>List of Tests:</span>
-            {this.state.loading ? <Spinner /> : <ul>{this.renderList()}</ul>}
+            {this.props.loading && this.props.tests.length !== 0
+              ? <Spinner />
+              : <ul>{this.renderList()}</ul>}
           </div>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    tests: state.quiz.tests,
+    loading: state.quiz.loading
+  }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchQuizes: () => dispatch(fetchQuizes())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(QuizList)

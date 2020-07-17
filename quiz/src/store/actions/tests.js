@@ -1,5 +1,5 @@
 import axios from '../../axios/axios-quiz';
-import { FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS, FETCH_QUIZES_ERROR, FETCH_QUIZE_SUCCESS } from './actionTypes';
+import { FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS, FETCH_QUIZES_ERROR, FETCH_QUIZE_SUCCESS, QUIZ_SET_STATE, FINISH_QUIZ, QUIZ_NEXT_QUESTION } from './actionTypes';
 
 export const fetchQuizes = () => {
     return async dispatch => {
@@ -63,4 +63,81 @@ export const fetchQuizById = (quizId) => {
             dispatch(fetchQuizesError(error))
         }
     }
+}
+
+export const quizSetState = (answerResult, quizResult) => {
+    return {
+        type: QUIZ_SET_STATE,
+        answerResult, quizResult
+    }
+}
+
+export const finishQuiz = () => {
+    return {
+        type: FINISH_QUIZ
+    }
+}
+
+export const quizNextQuestion = (number) => {
+    return {
+        type: QUIZ_NEXT_QUESTION,
+        number
+    }
+}
+
+export const quizAnswerClick = (answerId) => {
+    // dispatch without async because we do NOT work with server
+    //  we works we state and for it we need to use `getState`
+    return (dispatch, getState) => {
+        const state = getState().quiz
+
+        // there is a setTimeout here and if we will click double time on correct
+        // answer we will select answer from next question. To prevent it
+        // we need to check
+        if (state.answerResult) {
+            const key = Object.keys(state.answerResult)[0];
+            if (state.answerResult[key] === "success") {
+                return;
+            }
+        }
+        const question = state.quiz[state.activeQuestion];
+
+        // TODO
+        // STRANGE SOLUTION LOOKS ON IT LATER
+        const quizResult = state.quizResult;
+        if (question.rightAnswerId === answerId) {
+            if (!quizResult[question.id]) {
+                quizResult[question.id] = "success";
+            }
+            dispatch(quizSetState({ [answerId]: "success" }, quizResult))
+            // this.setState({
+            //     answerResult: { [answerId]: "success" },
+            //     quizResult,
+            // });
+
+            const timeout = window.setTimeout(() => {
+                if (isQuizFinished(state)) {
+                    dispatch(finishQuiz())
+                    // this.setState({ isFinished: true });
+                } else {
+                    // this.setState(({ activeQuestion }) => {
+                    //     return { activeQuestion: activeQuestion + 1, answerResult: null };
+                    // });
+                    dispatch(quizNextQuestion(state.activeQuestion + 1))
+                }
+                window.clearTimeout(timeout);
+            }, 1000);
+        } else {
+            quizResult[question.id] = "error";
+            dispatch(quizSetState({ [answerId]: "error" }, quizResult))
+            // this.setState({
+            //     answerResult: { [answerId]: "error" },
+            //     quizResult,
+            // });
+        }
+    }
+}
+
+const isQuizFinished = (state) => {
+    return state.activeQuestion + 1 === state.quiz.length;
 }

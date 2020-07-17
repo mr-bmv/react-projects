@@ -1,5 +1,5 @@
 import axios from '../../axios/axios-quiz';
-import { FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS, FETCH_QUIZES_ERROR, FETCH_QUIZE_SUCCESS, QUIZ_SET_STATE, FINISH_QUIZ, QUIZ_NEXT_QUESTION } from './actionTypes';
+import { FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS, FETCH_QUIZES_ERROR, FETCH_QUIZE_SUCCESS, QUIZ_SET_STATE, FINISH_QUIZ, QUIZ_NEXT_QUESTION, RETRY_QUIZ } from './actionTypes';
 
 export const fetchQuizes = () => {
     return async dispatch => {
@@ -140,4 +140,10 @@ export const quizAnswerClick = (answerId) => {
 
 const isQuizFinished = (state) => {
     return state.activeQuestion + 1 === state.quiz.length;
+}
+
+export const retryQuiz = () => {
+    return {
+        type: RETRY_QUIZ
+    }
 }

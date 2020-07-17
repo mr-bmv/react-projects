@@ -4,7 +4,7 @@ import ActiveQuiz from "../../components/activeQuiz/activeQuiz";
 import FinishedQuiz from "../../components/finishedQuiz/finishedQuiz";
 import Spinner from "../../components/UI/Spinner/spinner";
 import { connect } from "react-redux";
-import { fetchQuizById, quizAnswerClick } from "../../store/actions/tests";
+import { fetchQuizById, quizAnswerClick, retryQuiz } from "../../store/actions/tests";
 
 class Quiz extends Component {
 
@@ -14,12 +14,13 @@ class Quiz extends Component {
   }
 
   onRetryHandler = () => {
-    this.setState({
-      quizResult: {},
-      activeQuestion: 0,
-      answerResult: null,
-      isFinished: false,
-    });
+    this.props.retryQuiz()
+    // this.setState({
+    //   quizResult: {},
+    //   activeQuestion: 0,
+    //   answerResult: null,
+    //   isFinished: false,
+    // });
   };
 
   render() {
@@ -75,7 +76,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchQuizById: (id) => dispatch(fetchQuizById(id)),
-    quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId))
+    quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
+    retryQuiz: () => dispatch(retryQuiz())
   }
 }
 

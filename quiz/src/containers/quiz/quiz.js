@@ -13,14 +13,17 @@ class Quiz extends Component {
     this.props.fetchQuizById(this.props.match.params.id)
   }
 
+  // It will give us possibility to close component and clean it.
+  // Without it, all data in component would be saved and if quiz would be 
+  // closed in middle and open again, all results of it would be saved and quiz 
+  // could be continued from `quit` point
+  componentWillUnmount() {
+    this.props.retryQuiz()
+
+  }
+
   onRetryHandler = () => {
     this.props.retryQuiz()
-    // this.setState({
-    //   quizResult: {},
-    //   activeQuestion: 0,
-    //   answerResult: null,
-    //   isFinished: false,
-    // });
   };
 
   render() {

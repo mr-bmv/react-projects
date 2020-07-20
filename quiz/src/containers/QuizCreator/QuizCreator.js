@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "../../axios/axios-quiz";
 import Button from "./../../components/UI/button/button";
 import Input from "./../../components/UI/input/input";
 

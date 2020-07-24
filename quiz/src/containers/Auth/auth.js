@@ -190,4 +190,6 @@ const mapDispatchToProps = (dispatch) => {
         auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
     }
 }
+
+//  this needed to connect with element with Store
 export default connect(null, mapDispatchToProps)(Auth)

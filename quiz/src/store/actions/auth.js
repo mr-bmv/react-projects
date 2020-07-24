@@ -18,7 +18,7 @@ export function auth(email, password, isLogin) {
         console.log(response.data)
 
         const data = response.data
-        // define how many seconds we will have uor token open
+        // define how many seconds we will have our token open
         const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000)
 
         // define GLOBAL variable to save all necessary data
@@ -41,6 +41,7 @@ export function autoLogout(time) {
 }
 
 export function logout() {
+    // clean up all local storage
     localStorage.removeItem('token')
     localStorage.removeItem('userId')
     localStorage.removeItem('expirationDate')
@@ -48,7 +49,6 @@ export function logout() {
         type: AUTH_LOGOUT
     }
 }
-
 
 export function authSuccess(token) {
     return {

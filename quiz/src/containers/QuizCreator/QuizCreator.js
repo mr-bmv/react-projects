@@ -202,4 +202,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+//  this needed to connect with element with Store
 export default connect(mapStateToProps, mapDispatchToProps)(QuizCreator)

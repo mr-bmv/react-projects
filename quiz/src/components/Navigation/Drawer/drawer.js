@@ -1,22 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import classes from "./drawer.module.css";
 import Backdrop from "../../UI/BackDrop/BackDrop";
 import { NavLink } from "react-router-dom";
 
-const links = [
-  { id: 1, path: "/", label: "Home Page", exact: true },
-  { id: 2, path: "/auth", label: "Log In", exact: false },
-  { id: 3, path: "/quiz-creator", label: "Creat New Quiz", exact: false },
-];
 
-const Drawer = ({ isOpen, onClose }) => {
-  const cls = [classes.drawer];
+class Drawer extends Component {
 
-  if (!isOpen) {
-    cls.push(classes.close);
-  }
-
-  const renderLinks = () => {
+  renderLinks = (links) => {
     return links.map(({ id, path, label, exact }) => {
       return (
         <li key={id}>
@@ -24,7 +14,7 @@ const Drawer = ({ isOpen, onClose }) => {
             to={path}
             exact={exact}
             activeClassName={classes.active}
-            onClick={onClose}
+            onClick={this.props.onClose}
           >
             {label}
           </NavLink>
@@ -32,15 +22,41 @@ const Drawer = ({ isOpen, onClose }) => {
       );
     });
   };
+  render() {
 
-  return (
-    <React.Fragment>
-      <nav className={cls.join(" ")}>
-        <ul>{renderLinks()}</ul>
-      </nav>
-      {isOpen ? <Backdrop onClick={onClose} /> : null}
-    </React.Fragment>
-  );
-};
+    const cls = [classes.drawer];
+
+    if (!this.props.isOpen) {
+      cls.push(classes.close);
+    }
+
+    // organize different links for different status of user(authenticated and non)
+    // set of links which will be shown in menu
+    const links = [
+      { id: 1, path: "/", label: "Home Page", exact: true }
+    ];
+
+    if (this.props.isAuthenticated) {
+      links.push({ id: 3, path: "/quiz-creator", label: "Creat New Quiz", exact: false })
+      links.push({ id: 4, path: "/logout", label: "Log Out", exact: false })
+    } else {
+      links.push(
+        { id: 2, path: "/auth", label: "Log In", exact: false }
+      )
+
+    }
+
+
+    return (
+      <React.Fragment>
+        <nav className={cls.join(" ")}>
+          <ul>{this.renderLinks(links)}</ul>
+        </nav>
+        {this.props.isOpen ? <Backdrop onClick={this.props.onClose} /> : null}
+      </React.Fragment>
+    );
+  };
+}
+
 
 export default Drawer;

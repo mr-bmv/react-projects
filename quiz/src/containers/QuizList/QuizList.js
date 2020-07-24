@@ -51,4 +51,6 @@ const mapDispatchToProps = (dispatch) => {
     fetchQuizes: () => dispatch(fetchQuizes())
   }
 }
+
+//  this needed to connect with element with Store
 export default connect(mapStateToProps, mapDispatchToProps)(QuizList)

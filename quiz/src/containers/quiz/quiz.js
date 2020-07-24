@@ -9,7 +9,6 @@ import { fetchQuizById, quizAnswerClick, retryQuiz } from "../../store/actions/t
 class Quiz extends Component {
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     this.props.fetchQuizById(this.props.match.params.id)
   }
 

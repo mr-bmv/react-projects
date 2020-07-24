@@ -122,7 +122,6 @@ class QuizCreator extends Component {
 
   createQuizHandler = (event) => {
     event.preventDefault()
-    console.log(this.state.quiz);
     // axios.post(
     //   // "https://react-quiz-37a08.firebaseio.com/tests.json",
     //   "tests.json",

@@ -45,7 +45,6 @@ class Auth extends Component {
     };
 
     loginHandler = () => {
-        console.log("click-click");
         // take from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
         // except API_KEY need to add info from Setting of your project. Go to your firebase Setting and choose " API for WEB App"
         // returnSecureToken - parameter which is required by firebase
@@ -69,7 +68,6 @@ class Auth extends Component {
     };
 
     registerHandler = () => {
-        console.log("reg");
         // take from "https://firebase.google.com/docs/reference/rest/auth#section-create-email-password"
         // except API_KEY need to add info from Setting of your project. Go to your firebase Setting and choose " API for WEB App"
         // returnSecureToken - parameter which is required by firebase

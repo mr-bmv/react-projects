@@ -16,7 +16,6 @@ export function auth(email, password, isLogin) {
         }
 
         const response = await axios.post(url, authData);
-        console.log(response.data)
 
         const data = response.data
         // define how many seconds we will have our token open

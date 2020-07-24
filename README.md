@@ -25,7 +25,7 @@ icon created by <https://www.iconspedia.com/>
 
 ## Quiz Application
 
-<img src="./img/Quiz.png" width="300" height="130"/>
+<img src="./img/Quiz.png" width="600" height="260"/>
 
 Hosting URL: https://react-quiz-37a08.web.app
 

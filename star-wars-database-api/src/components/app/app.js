@@ -9,7 +9,7 @@ import PeoplePage from "../people-page/people-page";
 import "./app.css";
 
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-services";
 
 export default class App extends Component {
@@ -66,7 +66,7 @@ export default class App extends Component {
               renderItem={(item) => <span>{item.name} {item.population}</span>} />
           </div>
           <div className="col-md-6">
-            <PersonDetails personId={selectedPerson} />
+            <ItemDetails personId={selectedPerson} />
           </div>
         </div>
 
@@ -77,7 +77,7 @@ export default class App extends Component {
               renderItem={(item) => `${item.name} _ ${item.model}`} />
           </div>
           <div className="col-md-6">
-            <PersonDetails personId={selectedPerson} />
+            <ItemDetails personId={selectedPerson} />
           </div>
         </div>
       </div>

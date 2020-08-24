@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import "./person-details.css";
+import "./item-details.css";
 import SwapiService from "../../services/swapi-services";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
@@ -14,17 +14,17 @@ export default class PersonDetails extends Component {
   };
 
   componentDidMount = () => {
-    this.updatePerson();
+    this.updateItem();
   };
 
   componentDidUpdate = prevProps => {
     if (this.props.personId !== prevProps.personId) {
       this.setState({ loading: true });
-      this.updatePerson();
+      this.updateItem();
     }
   };
 
-  updatePerson = () => {
+  updateItem = () => {
     const { personId } = this.props;
     if (!personId) {
       return;
@@ -37,13 +37,13 @@ export default class PersonDetails extends Component {
 
   render() {
     if (!this.state.person) {
-      return <span>Select any person, please</span>;
+      return <span>Select any item, please</span>;
     }
     const { person, loading } = this.state;
 
     const content = !loading ? <Content person={person} /> : <Spinner />;
 
-    return <div className="person-details card">{content}</div>;
+    return <div className="item-details card">{content}</div>;
   }
 }
 

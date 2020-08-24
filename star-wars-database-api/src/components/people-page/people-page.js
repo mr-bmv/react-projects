@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./people-page.css";
 
 import ItemList from "../item-list";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import ErrorIndicator from "../error-indicator";
 import SwapiService from "../../services/swapi-services";
 
@@ -60,7 +60,7 @@ export default class PeoplePage extends Component {
 
     const itemDetails =
       <ErrorBoundary>
-        <PersonDetails personId={selectedPerson} />
+        <ItemDetails personId={selectedPerson} />
       </ErrorBoundary >
 
     return (

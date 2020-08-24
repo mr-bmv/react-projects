@@ -24,14 +24,10 @@ const PeopleContainer = ({ leftSide, rightSide }) => {
   )
 }
 
-
-export default class PeoplePage extends Component {
-  swapiService = new SwapiService();
-  state = { selectedPerson: null, hasError: false };
-
-  onPersonSelected = id => {
-    this.setState({ selectedPerson: id });
-  };
+class ErrorBoundary extends Component {
+  state = {
+    hasError: false
+  }
 
   componentDidCatch = () => {
     this.setState({ hasError: true });
@@ -41,7 +37,20 @@ export default class PeoplePage extends Component {
     if (this.state.hasError) {
       return <ErrorIndicator />;
     }
+    return this.props.children
+  }
+}
 
+
+export default class PeoplePage extends Component {
+  swapiService = new SwapiService();
+  state = { selectedPerson: null };
+
+  onPersonSelected = id => {
+    this.setState({ selectedPerson: id });
+  };
+
+  render() {
     const { selectedPerson } = this.state;
 
     const itemList =
@@ -49,7 +58,10 @@ export default class PeoplePage extends Component {
         getData={this.swapiService.getAllPeople}
         renderItem={(item) => (`${item.name} (${item.gender})`)} />
 
-    const itemDetails = <PersonDetails personId={selectedPerson} />
+    const itemDetails =
+      <ErrorBoundary>
+        <PersonDetails personId={selectedPerson} />
+      </ErrorBoundary >
 
     return (
       <PeopleContainer leftSide={itemList} rightSide={itemDetails} />

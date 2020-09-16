@@ -1,6 +1,7 @@
 import React from 'react';
 import { TaskList } from './components/TaskList';
 import { useState } from 'react';
+import TaskListContext from './context/TaskListContext'
 
 function App() {
 
@@ -10,14 +11,6 @@ function App() {
     { id: 3, title: "third todo", active: true, important: false, done: false },
     { id: 4, title: "fourth todo", active: true, important: false, done: false }
   ])
-
-  const onImportant = (id) => {
-    onAction(id, "important")
-  }
-
-  const onDelete = (id) => {
-    onAction(id, "active")
-  }
 
   const onAction = (id, action) => {
     setWorkList(
@@ -30,18 +23,26 @@ function App() {
     )
   }
 
+  const onImportant = (id) => {
+    onAction(id, "important")
+  }
+
+  const onDelete = (id) => {
+    onAction(id, "active")
+  }
+
   const onTask = (id) => {
     onAction(id, "done")
   }
 
   return (
-    <div className="App">
-      <TaskList
-        taskList={taskList}
-        onImportant={onImportant}
-        onDelete={onDelete}
-        onTask={onTask} />
-    </div>
+    <TaskListContext.Provider value={{ onImportant, onDelete, onTask }}>
+      <div className="App">
+        <TaskList
+          taskList={taskList}
+        />
+      </div>
+    </TaskListContext.Provider>
   );
 }
 

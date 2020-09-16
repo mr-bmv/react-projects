@@ -8,12 +8,12 @@ export const TaskList = ({ taskList, onImportant, onDelete }) => {
             {taskList.map(task => {
                 console.log(task)
                 return (
-                    <div key={task.id}>
+                    <ul key={task.id}>
                         <Task
                             task={task}
                             onImportant={onImportant}
                             onDelete={onDelete} />
-                    </div>
+                    </ul>
                 )
             })}
         </div>

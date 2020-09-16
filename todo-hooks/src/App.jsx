@@ -5,10 +5,10 @@ import { useState } from 'react';
 function App() {
 
   const [taskList, setWorkList] = useState([
-    { id: 1, title: "first todo", active: true, important: false },
-    { id: 2, title: "second todo", active: true, important: false },
-    { id: 3, title: "third todo", active: true, important: false },
-    { id: 4, title: "fourth todo", active: true, important: false }
+    { id: 1, title: "first todo", active: true, important: false, done: false },
+    { id: 2, title: "second todo", active: true, important: false, done: false },
+    { id: 3, title: "third todo", active: true, important: false, done: false },
+    { id: 4, title: "fourth todo", active: true, important: false, done: false }
   ])
 
   const onImportant = (id) => {
@@ -30,12 +30,17 @@ function App() {
     )
   }
 
+  const onTask = (id) => {
+    onAction(id, "done")
+  }
+
   return (
     <div className="App">
       <TaskList
         taskList={taskList}
         onImportant={onImportant}
-        onDelete={onDelete} />
+        onDelete={onDelete}
+        onTask={onTask} />
     </div>
   );
 }

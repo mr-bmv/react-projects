@@ -1,12 +1,14 @@
 import React from 'react';
-import TaskList from './components/TaskList';
 import TaskListProvider from './context/TaskListContext'
+
+import './App.css'
+import TaskList from './components/TaskList/TaskList';
 
 function App() {
 
   return (
     <TaskListProvider>
-      <div className="App">
+      <div className="app">
         <TaskList />
       </div>
     </TaskListProvider>

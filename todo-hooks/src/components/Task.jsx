@@ -1,10 +1,9 @@
 import React from 'react';
-import TaskListContext from '../context/TaskListContext';
-import { useContext } from 'react';
+import  { useTaskList } from '../context/TaskListContext';
 
 export const Task = ({ task }) => {
 
-    const { onImportant, onDelete, onTask } = useContext(TaskListContext)
+    const { onImportant, onDelete, onTask } = useTaskList()
 
     return (
 

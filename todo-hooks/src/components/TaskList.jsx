@@ -1,7 +1,9 @@
 import React from 'react';
+import { useTaskList } from '../context/TaskListContext';
 import { Task } from './Task';
 
-export const TaskList = ({ taskList, onImportant, onDelete, onTask }) => {
+export const TaskList = () => {
+    const {taskList} = useTaskList()
 
     return (
         <div >
@@ -16,7 +18,7 @@ export const TaskList = ({ taskList, onImportant, onDelete, onTask }) => {
                 )
             })}
         </div>
-
-
     )
 }
+
+export default TaskList;

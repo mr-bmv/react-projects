@@ -3,11 +3,11 @@ import { useTaskList } from '../../context/TaskListContext';
 import { Task } from '../Task/Task';
 
 export const TaskList = () => {
-    const { taskList } = useTaskList()
+    const taskList = useTaskList()
 
     return (
         <ul className="list-group task-list">
-            {taskList.map(task => {
+            {taskList.taskList.map(task => {
                 console.log(task)
                 if (task.active) {
                     return (

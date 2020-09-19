@@ -9,14 +9,15 @@ export const useTaskList = () => {
 
 export const TaskListProvider = ({ children }) => {
 
-    const [taskList, setWorkList] = useState({
+    const [taskList, setTaskList] = useState({
         tasks: [
             { id: 1, title: "first todo", active: true, important: false, done: false },
             { id: 2, title: "second todo", active: true, important: false, done: false },
             { id: 3, title: "third todo", active: true, important: false, done: false },
             { id: 4, title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum", active: true, important: false, done: false }
         ],
-        newTask: null
+        newTask: '',
+        filter: 'all'
     })
 
     const onAction = (id, action) => {
@@ -29,7 +30,7 @@ export const TaskListProvider = ({ children }) => {
             return task
         })
 
-        setWorkList({
+        setTaskList({
             ...taskList,
             tasks: newValue
         })
@@ -54,13 +55,30 @@ export const TaskListProvider = ({ children }) => {
     const newItem = (title) => {
         const newTask = { ...taskTemplate, title }
         const newTaskList = [...taskList.tasks, newTask]
-        setWorkList({ ...newTask, tasks: newTaskList })
+        setTaskList({ ...taskList, tasks: newTaskList })
     }
 
+    const getSearchTask = (task) => {
+        console.log('im from context -', task)
+        setTaskList({
+            ...taskList,
+            newTask: task
+        })
+    }
+
+    const onFilter = (filter) => {
+        console.log(filter);
+        setTaskList({
+            ...taskList,
+            filter
+        })
+    }
+
+    console.log(taskList);
     return (
         <TaskListContext.Provider value={{
-            taskList: taskList.tasks,
-            onImportant, onDelete, onTask, newItem
+            data: taskList,
+            onImportant, onDelete, onTask, newItem, getSearchTask, onFilter
         }}>
             {children}
         </TaskListContext.Provider>

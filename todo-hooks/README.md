@@ -1,5 +1,7 @@
 # ToDo App with Hooks
 
+<img src="../img/todo-hooks.png" width="600" height="550"/>
+
 This application is made without class-based components. Main idea is to use only functional component and hooks to cover all functional.
 
 `useState`, `useContext` were used in this project.

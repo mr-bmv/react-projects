@@ -6,7 +6,6 @@ export const TaskList = () => {
     const { list } = useTaskList()
 
     const content = list.map(task => {
-        console.log(task)
         return (
             <li className="table-default border-secondary list-group-item"
                 key={task.id}>

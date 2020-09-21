@@ -26,7 +26,6 @@ export const TaskListProvider = ({ children }) => {
             if (task.id === id) {
                 task[action] = !task[action]
             }
-            console.log('task - ', task);
             return task
         })
 
@@ -63,7 +62,6 @@ export const TaskListProvider = ({ children }) => {
     }
 
     const getSearchTask = (task) => {
-        console.log('im from context -', task)
         setTaskList({
             ...taskList,
             searchTask: task
@@ -71,7 +69,6 @@ export const TaskListProvider = ({ children }) => {
     }
 
     const onFilter = (filter) => {
-        console.log(filter);
         setTaskList({
             ...taskList,
             filter
@@ -80,7 +77,6 @@ export const TaskListProvider = ({ children }) => {
 
     const removeTasks = () => {
         const newTaskList = taskList.tasks.filter(task => task.active)
-        console.log('newTaskList - ', newTaskList);
         setTaskList((taskList) => {
             return ({
                 ...taskList,
@@ -90,9 +86,6 @@ export const TaskListProvider = ({ children }) => {
     }
 
     const filterIt = (data, filter) => {
-        console.log('Filter');
-        console.log('data - ', data);
-        console.log('action - ', filter);
         switch (filter) {
             case 'all':
                 return data.filter(task => task.active)
@@ -124,14 +117,12 @@ export const TaskListProvider = ({ children }) => {
     const activeQTY = () => {
 
         const qty = taskList.tasks.filter(task => task.active && !task.done).length;
-        console.log("QTY - ", qty);
         return qty;
     }
 
     const doneQTY = () => {
 
         const qty = taskList.tasks.filter(task => task.active && task.done).length;
-        console.log("QTY - ", qty);
         return qty;
     }
 

@@ -17,27 +17,24 @@ export const Task = ({ task }) => {
         className += " important"
     }
 
-    if (task.active) {
-        return (
-            <span className={className}>
-                <span className='task-list-item-title'
-                    onClick={() => onTask(task.id)}>
-                    {task.title}
-                </span>
-                <button
-                    type="button"
-                    className="btn btn-outline-success btn-sm float-right"
-                    onClick={() => onImportant(task.id)}>
-                    <i className="fa fa-exclamation" />
-                </button>
-                <button
-                    type="button"
-                    className="btn btn-outline-danger btn-sm float-right"
-                    onClick={() => onDelete(task.id)}>
-                    <i className="fa fa-trash-o" />
-                </button>
+    return (
+        <span className={className}>
+            <span className='task-list-item-title'
+                onClick={() => onTask(task.id)}>
+                {task.title}
             </span>
-        )
-    }
-    return null
+            <button
+                type="button"
+                className="btn btn-outline-success btn-sm float-right"
+                onClick={() => onImportant(task.id)}>
+                <i className="fa fa-exclamation" />
+            </button>
+            <button
+                type="button"
+                className="btn btn-outline-danger btn-sm float-right"
+                onClick={() => onDelete(task.id)}>
+                <i className="fa fa-trash-o" />
+            </button>
+        </span>
+    )
 }

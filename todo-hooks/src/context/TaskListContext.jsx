@@ -16,7 +16,7 @@ export const TaskListProvider = ({ children }) => {
             { id: 3, title: "third todo", active: true, important: false, done: false },
             { id: 4, title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum", active: true, important: false, done: false }
         ],
-        newTask: '',
+        searchTask: '',
         filter: 'all'
     })
 
@@ -49,7 +49,11 @@ export const TaskListProvider = ({ children }) => {
     }
 
     const taskTemplate = {
-        id: Date.now(), title: '', active: true, important: false, done: false
+        id: Date.now(),
+        title: '',
+        active: true,
+        important: false,
+        done: false
     }
 
     const newItem = (title) => {
@@ -62,7 +66,7 @@ export const TaskListProvider = ({ children }) => {
         console.log('im from context -', task)
         setTaskList({
             ...taskList,
-            newTask: task
+            searchTask: task
         })
     }
 
@@ -74,16 +78,82 @@ export const TaskListProvider = ({ children }) => {
         })
     }
 
-    console.log(taskList);
+    const removeTasks = () => {
+        const newTaskList = taskList.tasks.filter(task => task.active)
+        console.log('newTaskList - ', newTaskList);
+        setTaskList((taskList) => {
+            return ({
+                ...taskList,
+                tasks: newTaskList
+            })
+        })
+    }
+
+    const filterIt = (data, filter) => {
+        console.log('Filter');
+        console.log('data - ', data);
+        console.log('action - ', filter);
+        switch (filter) {
+            case 'all':
+                return data.filter(task => task.active)
+
+            case 'done':
+                return data.filter(task => task.active && task.done)
+
+            case 'active':
+                return data.filter(task => task.active && !task.done)
+
+            case 'remove':
+                return data.filter(task => !task.active)
+
+            default:
+                return data
+        }
+    }
+
+    const searchList = (data, action) => {
+        if (action) {
+            return data.filter(
+                task => task.title.toLowerCase().indexOf(action.toLowerCase()) > -1
+            );
+        } else {
+            return data;
+        }
+    }
+
+    const activeQTY = () => {
+
+        const qty = taskList.tasks.filter(task => task.active && !task.done).length;
+        console.log("QTY - ", qty);
+        return qty;
+    }
+
+    const doneQTY = () => {
+
+        const qty = taskList.tasks.filter(task => task.active && task.done).length;
+        console.log("QTY - ", qty);
+        return qty;
+    }
+
+    const list = filterIt(searchList(taskList.tasks, taskList.searchTask), taskList.filter)
+
     return (
         <TaskListContext.Provider value={{
             data: taskList,
-            onImportant, onDelete, onTask, newItem, getSearchTask, onFilter
+            list,
+            onImportant,
+            onDelete,
+            onTask,
+            newItem,
+            getSearchTask,
+            onFilter,
+            removeTasks,
+            activeQTY,
+            doneQTY
         }}>
             {children}
         </TaskListContext.Provider>
     )
 }
-
 
 export default TaskListProvider;

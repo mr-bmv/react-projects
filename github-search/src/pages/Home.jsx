@@ -8,7 +8,7 @@ function Home() {
 
     const elements = cards.map(card => {
         return (
-            <div className="col-sm-4 mb-4">
+            <div className="col-sm-4 mb-4" key={card}>
                 <Card />
             </div>
         )

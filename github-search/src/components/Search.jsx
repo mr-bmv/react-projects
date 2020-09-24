@@ -23,6 +23,7 @@ function Search() {
             github.search(value.trim())
         } else {
             showAlert('You have to put username for searching', 'danger')
+            github.clearUsers()
         }
     }
 

@@ -1,19 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Card() {
+function Card({ login, avatar_url }) {
 
-    const name = 'name'
     return (
         <div className="card">
-            <img src={''} alt={''} className='card-img-top' />
+            <img src={avatar_url} alt={login} className='card-img-top' />
             <div className='card-body'>
-                <h5 className="card-title"> React JS</h5>
-                <Link to={'/profile/' + name}
+                <h5 className="card-title"> {login}</h5>
+                <Link to={'/profile/' + login}
                     className='btn btn-primary'>Open</Link>
             </div>
         </div>
     )
 }
 
-export default Card
+export default Card;

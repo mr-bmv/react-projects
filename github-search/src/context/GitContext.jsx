@@ -67,7 +67,12 @@ const GitProvider = ({ children }) => {
 
         const response = await getData(value)
 
-        dispatch({ type: SEARCH_USERS, payload: [response.items] })
+        // const response = await fetch(`${_apiGitHub}search/users?q=${value}&${credentials}`)
+        //     .then((res) => res.json())
+        //     .then((data) => data)
+        console.log('response.items - ', response.items)
+
+        dispatch({ type: SEARCH_USERS, payload: response.items })
     }
 
     const getUser = async name => {

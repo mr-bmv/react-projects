@@ -15,7 +15,6 @@ const getPlanet = async (value) => {
 
 const Delete = () => {
 
-    console.log(getPlanet("mr-bm"))
     return (
         <div>
             delete

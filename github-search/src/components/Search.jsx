@@ -3,9 +3,6 @@ import { useState } from 'react'
 import { useAlertContext } from '../context/AlertContext'
 import { useGitContext } from '../context/GitContext'
 
-console.log(process.env.REACT_APP_CLIENT_ID)
-console.log(process.env.REACT_APP_CLIENT_SECRET)
-
 function Search() {
 
     const [value, setValue] = useState('')

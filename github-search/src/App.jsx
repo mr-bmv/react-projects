@@ -14,6 +14,7 @@ function App() {
       <AlertProvider>
         <Router>
           <Navbar />
+
           <div className='pt-4'>
             <Alert />
             <Switch>

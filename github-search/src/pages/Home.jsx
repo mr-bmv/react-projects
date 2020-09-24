@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Spinner from '../components/Spinner/Spinner';
 import Card from '../components/Card';
 import Search from '../components/Search'
 import { useGitContext } from '../context/GitContext';
@@ -6,11 +7,9 @@ import { useGitContext } from '../context/GitContext';
 function Home() {
   const { users, loading } = useGitContext()
 
-  console.log(users)
-
   if (loading) {
     return (
-      <div className="text-center">Loading ...</div>
+      <Spinner />
     )
   }
 

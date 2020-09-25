@@ -78,8 +78,9 @@ const GitProvider = ({ children }) => {
         setLoading()
 
         const response = await getDataUser(name)
+        console.log("user - ", response)
 
-        dispatch({ type: GET_USER, payload: response.data })
+        dispatch({ type: GET_USER, payload: response })
     }
 
     const getRepos = async name => {
@@ -87,7 +88,7 @@ const GitProvider = ({ children }) => {
 
         const response = await getDataRepos(name)
 
-        dispatch({ type: GET_REPOS, payload: response.data })
+        dispatch({ type: GET_REPOS, payload: response })
     }
 
     const clearUsers = () => {

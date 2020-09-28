@@ -19,26 +19,17 @@ const getResponse = async value => {
 }
 
 const getData = async (value) => {
-    // const response = await fetch(`${_apiGitHub}search/users?q=${value}&${credentials}`)
-    //     .then((res) => res.json())
-    //     .then((data) => data)
     const response = await getResponse(`search/users?q=${value}&`)
 
     return response
 }
 
 const getDataUser = async (name) => {
-    // const response = await fetch(`${_apiGitHub}users/${name}?${credentials}`)
-    //     .then((res) => res.json())
-    //     .then((data) => data)
     const response = await getResponse(`users/${name}?`)
     return response
 }
 
 const getDataRepos = async (name) => {
-    // const response = await fetch(`${_apiGitHub}users/${name}/repos?per_page=5&${credentials}`)
-    //     .then((res) => res.json())
-    //     .then((data) => data)
     const response = await getResponse(`users/${name}/repos?per_page=5&`)
     return response
 }
@@ -67,10 +58,6 @@ const GitProvider = ({ children }) => {
 
         const response = await getData(value)
 
-        // const response = await fetch(`${_apiGitHub}search/users?q=${value}&${credentials}`)
-        //     .then((res) => res.json())
-        //     .then((data) => data)
-
         dispatch({ type: SEARCH_USERS, payload: response.items })
     }
 
@@ -78,7 +65,6 @@ const GitProvider = ({ children }) => {
         setLoading()
 
         const response = await getDataUser(name)
-        console.log("user - ", response)
 
         dispatch({ type: GET_USER, payload: response })
     }

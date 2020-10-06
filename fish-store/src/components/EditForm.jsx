@@ -21,6 +21,7 @@ export default class EditForm extends Component {
         </select>
         <textarea name="desc" ref={this.descRef} value={desc} onChange={this.handleChange} />
         <input name="image" ref={this.imageRef} type="text" onChange={this.handleChange} />
+        <button type="submit" onClick={() => this.props.deleteFish(this.props.index)}>Delete fish</button>
       </form>
     )
   }

@@ -22,11 +22,13 @@ export default class Order extends Component {
           <li key={fishId}>
             {qty} lbs {fish.name}
             <div>{formatPrice(fish.price)}</div>
+            <button onClick={() => this.props.removeFromOrder(fishId)}>&times;</button>
           </li>
         )
       })
 
     return (
+      
       <div className="order-wrap">
         <h2>Order</h2>
         <ul className="order">

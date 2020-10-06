@@ -51,15 +51,27 @@ export default class App extends Component {
         })
     }
 
+    deleteFish = (key) => {
+        const fishes = { ...this.state.fishes }
+        fishes[key] = null;
+        this.setState({ fishes })
+    }
+
     loadSampleFishes = () => {
         this.setState({
             fishes: sampleFishes
         })
     }
 
-    addToCard = (fish) => {
+    addToOrder = (fish) => {
         const order = { ...this.state.order }
         order[fish] = order[fish] + 1 || 1
+        this.setState({ order: order })
+    }
+
+    removeFromOrder = (fish) => {
+        const order = { ...this.state.order }
+        delete order[fish]
         this.setState({ order: order })
     }
 
@@ -75,17 +87,19 @@ export default class App extends Component {
     }
 
     getFullPrice = () => {
+        console.log(this.state.order)
 
         return Object.keys(this.state.order)
             .reduce((prevTotal, key) => {
-                let sum = 0
-                // in case when we load data from local  storage before response from
+                // in case when we load data from local storage before response from
                 // firebase came
-                if (!this.state.fishes[key]) return null;
-                if (this.state.fishes[key].status === "available") {
-                    sum = this.state.fishes[key].price * this.state.order[key]
+                const fish = this.state.fishes[key]
+                const count = this.state.order[key]
+                const isAvailable = fish && fish.status === "available";
+                if (isAvailable) {
+                    return prevTotal + fish.price * count
                 }
-                return prevTotal + sum
+                return prevTotal
             }, 0)
     }
 
@@ -101,7 +115,7 @@ export default class App extends Component {
                 <Fish
                     key={fish}
                     details={this.state.fishes[fish]}
-                    addToCard={() => this.addToCard(fish)}
+                    addToCard={() => this.addToOrder(fish)}
                 />);
 
         return (
@@ -115,9 +129,11 @@ export default class App extends Component {
                 <Order details={this.state.order}
                     getFishInfo={this.getFishInfo}
                     getFullPrice={this.getFullPrice}
+                    removeFromOrder={this.removeFromOrder}
                 />
                 <Inventory
                     addFish={this.addFish}
+                    deleteFish={this.deleteFish}
                     loadSampleFishes={this.loadSampleFishes}
                     fishes={this.state.fishes}
                     updateFish={this.updateFish}

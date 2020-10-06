@@ -89,6 +89,12 @@ export default class App extends Component {
             }, 0)
     }
 
+    updateFish = (key, newFish) => {
+        const fishes = { ...this.state.fishes }
+        fishes[key] = newFish;
+        this.setState({ fishes })
+    }
+
     render() {
         const elements = Object.keys(this.state.fishes)
             .map((fish) =>
@@ -113,6 +119,8 @@ export default class App extends Component {
                 <Inventory
                     addFish={this.addFish}
                     loadSampleFishes={this.loadSampleFishes}
+                    fishes={this.state.fishes}
+                    updateFish={this.updateFish}
                 />
             </div>
         )

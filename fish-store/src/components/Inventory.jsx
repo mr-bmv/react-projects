@@ -1,8 +1,23 @@
 import React, { Component } from 'react'
 import AddFishForm from './AddFishForm'
 import EditForm from './EditForm'
+import PropTypes from 'prop-types'
 
 export default class Inventory extends Component {
+    static propTypes = {
+        fishes: PropTypes.shape({
+            image: PropTypes.string,
+            name: PropTypes.string,
+            desc: PropTypes.string,
+            status: PropTypes.string,
+            price: PropTypes.number
+        }),
+        updateFish: PropTypes.func,
+        deleteFish: PropTypes.func,
+        addFish: PropTypes.func,
+        loadSampleFishes: PropTypes.func
+    }
+
     render() {
         const cards = Object.keys(this.props.fishes)
             .map((fish) =>

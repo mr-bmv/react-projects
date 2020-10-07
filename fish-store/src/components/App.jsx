@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+// components
 import Header from './Header'
 import Order from './Order'
 import Inventory from './Inventory'
 import sampleFishes from '../sample-fishes'
 import Fish from './Fish'
+
 import base from '../base/base'
 
 
 export default class App extends Component {
+
+    static propTypes = {
+        match: PropTypes.object
+    }
 
     state = {
         fishes: {},
@@ -87,8 +95,6 @@ export default class App extends Component {
     }
 
     getFullPrice = () => {
-        console.log(this.state.order)
-
         return Object.keys(this.state.order)
             .reduce((prevTotal, key) => {
                 // in case when we load data from local storage before response from

@@ -593,11 +593,11 @@ input[type=submit].twitter {
 }
 button.github,
 input[type=submit].github {
-  background: #82d465;
+  background: #000000;
 }
 button.github:after,
 input[type=submit].github:after {
-  background: #5cc437;
+  background: #808080;
 }
 button.facebook,
 input[type=submit].facebook {

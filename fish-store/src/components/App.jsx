@@ -143,6 +143,7 @@ export default class App extends Component {
                     loadSampleFishes={this.loadSampleFishes}
                     fishes={this.state.fishes}
                     updateFish={this.updateFish}
+                    storeId={this.props.match.params.id}
                 />
             </div>
         )

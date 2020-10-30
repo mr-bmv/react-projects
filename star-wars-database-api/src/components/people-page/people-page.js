@@ -6,10 +6,11 @@ import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-services";
 import ContentRow from "../../container/ContentRow";
 import ErrorBoundary from "../../hoc/ErrorBoundary";
+import { Record } from "../item-details/item-details";
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
-  
+
   state = { selectedPerson: null };
 
   onPersonSelected = id => {
@@ -26,7 +27,16 @@ export default class PeoplePage extends Component {
 
     const itemDetails =
       <ErrorBoundary>
-        <ItemDetails personId={selectedPerson} />
+        <ItemDetails
+          personId={selectedPerson}
+          getData={this.swapiService.getPerson}
+          getImageURL={this.swapiService.getPersonImg} >
+
+          <Record field="gender" label="Gender" />
+          <Record field="birthYear" label="Birth Year" />
+          <Record field="eyeColor" label="Eye Color" />
+
+        </ItemDetails>
       </ErrorBoundary >
 
     return (

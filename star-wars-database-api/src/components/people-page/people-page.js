@@ -5,7 +5,7 @@ import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi-services";
 import ContentRow from "../../container/ContentRow";
-import ErrorBoundary from "../../hoc/ErrorBoundary";
+import ErrorBoundary from "../../container/ErrorBoundary";
 import { Record } from "../item-details/item-details";
 
 export default class PeoplePage extends Component {
@@ -22,7 +22,6 @@ export default class PeoplePage extends Component {
 
     const itemList =
       <ItemList onItemSelected={this.onPersonSelected}
-        getData={this.swapiService.getAllPeople}
         renderItem={(item) => (`${item.name} (${item.gender})`)} />
 
     const itemDetails =

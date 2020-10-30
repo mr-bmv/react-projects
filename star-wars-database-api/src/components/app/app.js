@@ -15,7 +15,7 @@ import PeoplePage from "../people-page/people-page";
 import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import ContentRow from "../../container/ContentRow";
-import ErrorBoundary from "../../hoc/ErrorBoundary";
+import ErrorBoundary from "../../container/ErrorBoundary";
 import { Record } from "../item-details/item-details";
 
 export default class App extends Component {
@@ -102,7 +102,7 @@ export default class App extends Component {
           <ErrorButton />
         </div> */}
 
-          {/* <PeoplePage /> */}
+          <PeoplePage />
 
           <ContentRow leftSide={personDetails} rightSide={planetDetails} />
 

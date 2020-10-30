@@ -1,16 +1,32 @@
 import React, { Component } from "react";
 
 import "./item-details.css";
+
+// components
 import SwapiService from "../../services/swapi-services";
 import Spinner from "../spinner";
 import ErrorButton from "../error-button";
+
+// we catch item from child of ItemDetails. See React.cloneElement
+const Record = ({ item, field, label }) => {
+  return (<li className="list-group-item">
+    <span className="term">{label}</span>
+    <span>{item[field]}</span>
+  </li>)
+}
+
+// named export
+export {
+  Record
+}
 
 export default class ItemDetails extends Component {
   swapiService = new SwapiService();
 
   state = {
-    person: null,
-    loading: true
+    item: null,
+    loading: true,
+    image: null
   };
 
   componentDidMount = () => {
@@ -25,29 +41,35 @@ export default class ItemDetails extends Component {
   };
 
   updateItem = () => {
-    const { personId } = this.props;
+    const { personId, getData, getImageURL } = this.props;
     if (!personId) {
       return;
     }
 
-    this.swapiService.getPerson(personId).then(person => {
-      this.setState({ person, loading: false });
+    getData(personId).then(item => {
+      this.setState({
+        item,
+        loading: false,
+        image: getImageURL(item.id)
+      });
     });
+
   };
 
   render() {
-    if (!this.state.person) {
+    if (!this.state.item) {
       return <span>Select any item, please</span>;
     }
-    const { person, loading } = this.state;
+    const { item, loading, image } = this.state;
+    const { children } = this.props
 
-    const content = !loading ? <Content person={person} /> : <Spinner />;
+    const content = !loading ? <Content item={item} image={image} children={children} /> : <Spinner />;
 
     return <div className="item-details card">{content}</div>;
   }
 }
 
-const Content = ({ person }) => {
+const Content = ({ item, image, children }) => {
   const {
     id,
     name,
@@ -58,48 +80,31 @@ const Content = ({ person }) => {
     eyeColor,
     birthYear,
     gender
-  } = person;
+  } = item;
+
   return (
+
     <React.Fragment>
       <img
-        className="person-image"
-        src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+        className="item-image"
+        src={image}
         alt="Person"
       />
 
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Gender</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Birth Year</span>
-            <span>{birthYear}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Eye Color</span>
-            <span>{eyeColor}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Height</span>
-            <span>{height}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Mass</span>
-            <span>{mass}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Hair Color</span>
-            <span>{hairColor}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Skin Color</span>
-            <span>{skinColor}</span>
-          </li>
+
+          {/* we need to provide `item` for Record - it is a child of ItemDetails.
+ This is the way how we can clone child components and add new properties for it*/}
+          {React.Children.map(children, child => {
+            return React.cloneElement(child, { item })
+          })}
+
         </ul>
-        <div className='btn'><ErrorButton /></div>        
+        <div className='btn'>
+          <ErrorButton />
+        </div>
       </div>
     </React.Fragment>
   );

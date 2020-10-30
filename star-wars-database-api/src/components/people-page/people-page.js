@@ -9,6 +9,7 @@ import ErrorBoundary from "../../hoc/ErrorBoundary";
 
 export default class PeoplePage extends Component {
   swapiService = new SwapiService();
+  
   state = { selectedPerson: null };
 
   onPersonSelected = id => {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import "./item-list.css";
 import Spinner from "../spinner";
+import ErrorIndicator from "../error-indicator";
 
 export default class ItemList extends Component {
   state = {
@@ -9,27 +10,22 @@ export default class ItemList extends Component {
   };
 
   componentDidMount = () => {
-
     const { getData } = this.props
-
     getData()
       .then(itemList =>
         this.setState({
           itemList
-        })
-      );
+        }))
   };
 
-  renderPersons = () => {
+  renderItems = () => {
     const { itemList } = this.state;
     if (!itemList) {
       return <Spinner />;
     }
     return itemList.map((item) => {
-
-      const { id } = item
-      const text = this.props.renderItem(item)
-      // console.log(item);
+      const { id } = item;
+      const text = this.props.renderItem(item);
       return (
         <li
           key={id}
@@ -43,7 +39,7 @@ export default class ItemList extends Component {
   };
 
   render() {
-    const person = this.renderPersons();
+    const person = this.renderItems();
     return <ul className="item-list list-group">{person}</ul>;
   }
 }

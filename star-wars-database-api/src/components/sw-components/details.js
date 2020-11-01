@@ -73,6 +73,6 @@ const StarshipDetails = ({ itemId }) => {
   )
 };
 
-export {
-  PersonDetails, PlanetDetails, StarshipDetails
-};
+// export {
+//   PersonDetails, PlanetDetails, StarshipDetails
+// };

@@ -9,13 +9,15 @@ import SwapiService from "../../services/swapi-services";
 // components
 import Header from "../header";
 import RandomPlanet from "../random-planet";
-import ErrorButton from "../error-button";
 import ErrorIndicator from "../error-indicator";
 import ErrorBoundary from "../../container/ErrorBoundary";
 import { PersonList, PlanetList, StarshipList } from "../sw-components/item-lists";
-import { PersonDetails, PlanetDetails, StarshipDetails } from "../sw-components/details";
+// import { PersonDetails, PlanetDetails, StarshipDetails } from "../sw-components/details";
 import { SwapiServiceProvider } from "../../context/swapiServiceContext";
-import DummySwapiService from "../../services/dummy-service";
+import ErrorButton from "../error-button";
+import PersonDetails from "../sw-components/person-details";
+import PlanetDetails from "../sw-components/planet-details";
+import StarshipDetails from "../sw-components/starship-details";
 
 export default class App extends Component {
 
@@ -51,9 +53,9 @@ export default class App extends Component {
         <SwapiServiceProvider value={this.swapiService}>
           <div className="stardb-app">
             <Header />
-            {/* {content} */}
+            {content}
 
-            {/* <div className="row mb2 button-row">
+            <div className="row mb2 button-row">
               <button
                 type="button"
                 className="toggle-planet btn btn-warning btn-lg"
@@ -62,11 +64,11 @@ export default class App extends Component {
                 {buttonName}
               </button>
               <ErrorButton />
-            </div> */}
+            </div>
 
-            <PersonDetails itemId={11} />
+            <PersonDetails itemId={28} />
             <PlanetDetails itemId={5} />
-            <StarshipDetails itemId={9} />
+            <StarshipDetails itemId={15} />
 
             <PersonList />
             <StarshipList />

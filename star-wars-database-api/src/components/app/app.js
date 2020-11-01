@@ -53,52 +53,26 @@ export default class App extends Component {
       <ErrorBoundary>
         <div className="stardb-app">
           <Header />
-          {/* {content} */}
+          {content}
 
-          {/* <div className="row mb2 button-row">
-          <button
-            type="button"
-            className="toggle-planet btn btn-warning btn-lg"
-            onClick={this.onTogglePlanet}
-          >
-            {buttonName}
-          </button>
-          <ErrorButton />
-        </div> */}
-
-          {/* <PeoplePage /> */}
+          <div className="row mb2 button-row">
+            <button
+              type="button"
+              className="toggle-planet btn btn-warning btn-lg"
+              onClick={this.onTogglePlanet}
+            >
+              {buttonName}
+            </button>
+            <ErrorButton />
+          </div>
 
           <PersonDetails itemId={11} />
           <PlanetDetails itemId={11} />
           <StarshipDetails itemId={11} />
 
-          <PersonDetails>{({ name }) => <span>{name}</span>}</PersonDetails>
-          <StarshipList>{({ name }) => <span>{name}</span>}</StarshipList>
-          <PlanetList>{({ name }) => <span>{name}</span>}</PlanetList>
-
-          {/* <ContentRow leftSide={personDetails} rightSide={planetDetails} /> */}
-
-          {/* <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected}
-              getData={this.swapiService.getAllPlanets}
-              renderItem={(item) => <span>{item.name} {item.population}</span>} />
-          </div>
-          <div className="col-md-6">
-            <ItemDetails personId={selectedPerson} />
-          </div>
-        </div>
-
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected}
-              getData={this.swapiService.getAllStarShips}
-              renderItem={(item) => `${item.name} _ ${item.model}`} />
-          </div>
-          <div className="col-md-6">
-            <ItemDetails personId={selectedPerson} />
-          </div>
-        </div> */}
+          <PersonList />
+          <StarshipList />
+          <PlanetList />
         </div>
       </ErrorBoundary>
     );

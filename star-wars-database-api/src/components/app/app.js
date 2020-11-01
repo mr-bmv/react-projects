@@ -17,6 +17,8 @@ import ItemDetails from "../item-details";
 import ContentRow from "../../container/ContentRow";
 import ErrorBoundary from "../../container/ErrorBoundary";
 import { Record } from "../item-details/item-details";
+import { PersonList, PlanetList, StarshipList } from "../sw-components/item-lists";
+import { PersonDetails, PlanetDetails, StarshipDetails } from "../sw-components/details";
 
 export default class App extends Component {
 
@@ -47,44 +49,6 @@ export default class App extends Component {
     const content = showPlanet ? <RandomPlanet /> : null;
     const buttonName = showPlanet ? "Hide Random Planet" : "Show Random Planet";
 
-    const personDetails = (
-      <ItemDetails
-        personId={11}
-        getData={this.swapiService.getPerson}
-        getImageURL={this.swapiService.getPersonImg} >
-
-        <Record field="gender" label="Gender" />
-        <Record field="birthYear" label="Birth Year" />
-        <Record field="eyeColor" label="Eye Color" />
-
-      </ItemDetails>
-    )
-
-    const starshipDetails = (
-      <ItemDetails
-        personId={12}
-        getData={this.swapiService.getStarShip}
-        getImageURL={this.swapiService.getStarshipImg} >
-
-        <Record field="model" label="Model" />
-        <Record field="maxSpeed" label="Max Speed" />
-        <Record field="cargoCapacity" label="Capacity" />
-      </ItemDetails>
-    )
-
-    const planetDetails = (
-      <ItemDetails
-        personId={12}
-        getData={this.swapiService.getPlanet}
-        getImageURL={this.swapiService.getPlanetImg} >
-
-        <Record field="name" label="Name" />
-        <Record field="population" label="Population" />
-        <Record field="diameter" label="Diameter" />
-        <Record field="rotationPeriod" label="Rotation Period" />
-      </ItemDetails>
-    )
-
     return (
       <ErrorBoundary>
         <div className="stardb-app">
@@ -102,9 +66,17 @@ export default class App extends Component {
           <ErrorButton />
         </div> */}
 
-          <PeoplePage />
+          {/* <PeoplePage /> */}
 
-          <ContentRow leftSide={personDetails} rightSide={planetDetails} />
+          <PersonDetails itemId={11} />
+          <PlanetDetails itemId={11} />
+          <StarshipDetails itemId={11} />
+
+          <PersonDetails>{({ name }) => <span>{name}</span>}</PersonDetails>
+          <StarshipList>{({ name }) => <span>{name}</span>}</StarshipList>
+          <PlanetList>{({ name }) => <span>{name}</span>}</PlanetList>
+
+          {/* <ContentRow leftSide={personDetails} rightSide={planetDetails} /> */}
 
           {/* <div className="row mb2">
           <div className="col-md-6">

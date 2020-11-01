@@ -9,27 +9,26 @@ import withData from "../../hoc/with-data";
 
 const ItemList = (props) => {
 
-  const renderItems = (itemList) =>
-    itemList.map((item) => {
-      const { id } = item;
-      const text = props.renderItem(item);
-      return (
-        <li
-          key={id}
-          className="list-group-item"
-          onClick={() => props.onItemSelected(id)}
-        >
-          {text}
-        </li>
-      );
-    });
+  const { data, onItemSelected, children: renderLabels } = props;
 
-  const { data } = props;
-  const items = renderItems(data);
-  return <ul className="item-list list-group">{items}</ul>;
-}
+  const items = data.map((item) => {
+    const { id } = item;
+    const label = renderLabels(item);
 
-const { getAllPeople } = new SwapiService();
+    return (
+      <li className="list-group-item"
+        key={id}
+        onClick={() => onItemSelected(id)}>
+        {label}
+      </li>
+    );
+  });
 
-//  use HOC
-export default withData(ItemList, getAllPeople);
+  return (
+    <ul className="item-list list-group">
+      {items}
+    </ul>
+  );
+};
+
+export default ItemList;

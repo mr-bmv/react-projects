@@ -5,7 +5,7 @@ import { compose } from 'redux';
 // components
 import BookListItem from '../BookListItem/BookListItem';
 import withBookstoreService from '../HOC/withBookstoreService'
-import { booksLoaded } from '../../actions'
+import { booksLoaded, booksRequested } from '../../actions'
 import Spinner from '../Spinner/Spinner'
 
 //  styles
@@ -15,7 +15,8 @@ class BookList extends Component {
 
   componentDidMount() {
     // receive data using withBookstoreService
-    const { bookstoreService } = this.props;
+    const { bookstoreService, booksRequested } = this.props;
+    booksRequested()
 
     //  for promise
     bookstoreService.getBooks()
@@ -54,7 +55,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  booksLoaded
+  booksLoaded,
+  booksRequested
 };
 
 export default compose(

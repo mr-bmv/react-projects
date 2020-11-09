@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+
+// components
 import BookListItem from '../BookListItem/BookListItem';
 import withBookstoreService from '../HOC/withBookstoreService'
 import { booksLoaded } from '../../actions'
-import { compose } from 'redux';
 
+//  styles
+import './BookList.css'
 
 class BookList extends Component {
 
@@ -20,7 +24,7 @@ class BookList extends Component {
   render() {
     const { books } = this.props;
     return (
-      <ul>
+      <ul className="book-list">
         {
           books.map((book) => {
             return (

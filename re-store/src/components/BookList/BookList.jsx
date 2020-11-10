@@ -5,7 +5,7 @@ import { compose } from 'redux';
 // components
 import BookListItem from '../BookListItem/BookListItem';
 import withBookstoreService from '../HOC/withBookstoreService'
-import { booksLoaded, booksRequested, booksError } from '../../actions'
+import { fetchBooks } from '../../actions'
 import Spinner from '../Spinner/Spinner'
 import ErrorIndicator from '../ErrorIndicator/ErrorIndicator'
 
@@ -53,20 +53,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchBooks: () => {
-      dispatch(booksRequested())
-
-      //  for promise
-      ownProps.bookstoreService.getBooks()
-        .then((data) => {
-          // dispatch action to store
-          dispatch(booksLoaded(data))
-        })
-        .catch((error) => {
-          dispatch(booksError(error))
-        })
-
-    }
+    fetchBooks: fetchBooks(dispatch, ownProps)
   }
 };
 

@@ -18,4 +18,19 @@ const booksError = (error) => {
     }
 }
 
-export { booksLoaded, booksRequested, booksError };
+const fetchBooks = (dispatch, ownProps) => () => {
+    dispatch(booksRequested())
+
+    //  for promise
+    ownProps.bookstoreService.getBooks()
+        .then((data) => {
+            // dispatch action to store
+            dispatch(booksLoaded(data))
+        })
+        .catch((error) => {
+            dispatch(booksError(error))
+        })
+
+}
+
+export { booksLoaded, booksRequested, booksError, fetchBooks };

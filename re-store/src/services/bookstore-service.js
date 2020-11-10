@@ -19,10 +19,13 @@ export default class BookstoreService {
 
   getBooks() {
     // will imitate server work with some delay of response
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
+        if (Math.random() > 0.75) {
+          reject(new Error('Something went wrong =('))
+        }
         resolve(this.data)
-      }, 2000);
+      }, 700);
     });
   }
 }

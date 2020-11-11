@@ -1,4 +1,4 @@
-import { BOOK_ADDED_TO_CART, BOOK_DELETE_FROM_CART, FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS } from "./actionTypes";
+import { BOOK_ADDED_TO_CART, BOOK_DECREASE_IN_CART, BOOK_DELETE_FROM_CART, FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS } from "./actionTypes";
 
 const booksRequested = () => {
     return {
@@ -48,11 +48,19 @@ const bookDeleteFromCart = (bookId) => {
     }
 };
 
+const bookDecreaseInCart = (bookId) => {
+    return {
+        type: BOOK_DECREASE_IN_CART,
+        payload: bookId
+    }
+}
+
 export {
     booksLoaded,
     booksRequested,
     booksError,
     fetchBooks,
     bookAddedToCart,
-    bookDeleteFromCart
+    bookDeleteFromCart,
+    bookDecreaseInCart
 };

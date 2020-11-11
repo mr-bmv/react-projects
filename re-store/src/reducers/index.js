@@ -1,23 +1,10 @@
-import { FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS } from "../actions/actionTypes";
+import { FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS, BOOK_ADDED_TO_CART } from "../actions/actionTypes";
 
 const initialState = {
   books: [],
   loading: true,
   error: false,
-  cartItems: [
-    {
-      id: 1,
-      title: "Book 1",
-      total: 25,
-      count: 1
-    },
-    {
-      id: 2,
-      title: "Other Book 3",
-      total: 40,
-      count: 1
-    }
-  ],
+  cartItems: [],
   totalPrice: 65
 };
 
@@ -45,6 +32,23 @@ const reducer = (state = initialState, action) => {
         books: [],
         loading: false,
         error: action.payload
+      };
+    case BOOK_ADDED_TO_CART:
+      const bookId = action.payload;
+      const book = state.books.find((book) => book.id === bookId);
+      const newItem = {
+        id: book.id,
+        title: book.title,
+        count: 1,
+        total: book.price
+      };
+
+      return {
+        ...state,
+        cartItems: [
+          ...state.cartItems,
+          newItem
+        ]
       };
 
     default:

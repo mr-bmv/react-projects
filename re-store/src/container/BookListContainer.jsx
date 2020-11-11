@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { fetchBooks } from '../actions';
+import { bookAddedToCart, fetchBooks } from '../actions';
 import BookList from '../components/BookList/BookList';
 import ErrorIndicator from '../components/ErrorIndicator/ErrorIndicator';
 import withBookstoreService from '../components/HOC/withBookstoreService';
@@ -24,7 +24,7 @@ class BookListContainer extends Component {
       return <ErrorIndicator />
     }
 
-    return <BookList books={books} />
+    return <BookList books={books} onAddToCart={this.props.onAddToCart} />
   }
 };
 
@@ -38,7 +38,8 @@ const mapStateToProps = ({ books, loading, error }) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    fetchBooks: fetchBooks(dispatch, ownProps)
+    fetchBooks: fetchBooks(dispatch, ownProps),
+    onAddToCart: (id) => dispatch(bookAddedToCart(id))
   }
 };
 

@@ -8,6 +8,42 @@ const initialState = {
   totalPrice: 65
 };
 
+// update item or add new item
+const updateCartItems = (cartItems, item, index) => {
+  if (index === -1) {
+    // Add new element
+    return [
+      ...cartItems,
+      item
+    ]
+  } else {
+    // update element
+    return [
+      ...cartItems.slice(0, index),
+      item,
+      ...cartItems.slice(index + 1),
+    ]
+  }
+};
+
+const updateCartItem = (item, book) => {
+  // if cartItems contain item with bookId we add one more
+  if (item) {
+    return {
+      ...item,
+      count: item.count + 1,
+      total: item.total + book.price
+    };
+  } else {
+    return {
+      id: book.id,
+      title: book.title,
+      count: 1,
+      total: book.price
+    };
+  }
+}
+
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -36,19 +72,18 @@ const reducer = (state = initialState, action) => {
     case BOOK_ADDED_TO_CART:
       const bookId = action.payload;
       const book = state.books.find((book) => book.id === bookId);
-      const newItem = {
-        id: book.id,
-        title: book.title,
-        count: 1,
-        total: book.price
-      };
+
+      // looking for index of element which the same like these which we choose
+      //  if there are no element with this the same index we will get `-1`
+      const itemIndex = state.cartItems.findIndex((item) => item.id === bookId)
+      // take element with this index or `undefine`
+      const item = state.cartItems[itemIndex];
+
+      const newItem = updateCartItem(item, book);
 
       return {
         ...state,
-        cartItems: [
-          ...state.cartItems,
-          newItem
-        ]
+        cartItems: updateCartItems(state.cartItems, newItem, itemIndex)
       };
 
     default:

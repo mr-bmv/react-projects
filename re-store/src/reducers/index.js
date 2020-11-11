@@ -1,4 +1,10 @@
-import { FETCH_BOOKS_FAILURE, FETCH_BOOKS_REQUEST, FETCH_BOOKS_SUCCESS, BOOK_ADDED_TO_CART } from "../actions/actionTypes";
+import {
+  FETCH_BOOKS_FAILURE,
+  FETCH_BOOKS_REQUEST,
+  FETCH_BOOKS_SUCCESS,
+  BOOK_ADDED_TO_CART,
+  BOOK_DELETE_FROM_CART
+} from "../actions/actionTypes";
 
 const initialState = {
   books: [],
@@ -44,6 +50,13 @@ const updateCartItem = (item, book) => {
   }
 }
 
+const deleteCartItems = (cartItems, index) => {
+  return [
+    ...cartItems.slice(0, index),
+    ...cartItems.slice(index + 1),
+  ]
+};
+
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -84,6 +97,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cartItems: updateCartItems(state.cartItems, newItem, itemIndex)
+      };
+
+    case BOOK_DELETE_FROM_CART:
+      const bookIdDelete = action.payload;
+
+      const itemIndexDelete = state.cartItems.findIndex((item) => item.id === bookIdDelete)
+
+      return {
+        ...state,
+        cartItems: deleteCartItems(state.cartItems, itemIndexDelete)
       };
 
     default:

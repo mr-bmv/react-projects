@@ -45,7 +45,7 @@ const updateCartItem = (item, book, qty) => {
 
 const updateOrder = (state, bookId, qty) => {
 
-    const { bookList: { books }, shoppingCart: { cartItems } } = state;
+    const { bookList: { books }, shoppingCart: { cartItems, totalPrice } } = state;
     const book = books.find((book) => book.id === bookId);
 
     // looking for index of element which the same like these which we choose
@@ -56,8 +56,10 @@ const updateOrder = (state, bookId, qty) => {
 
     const newItem = updateCartItem(item, book, qty);
 
+    const newTotal = totalPrice + book.price * qty
+
     return {
-        totalPrice: 0,
+        totalPrice: newTotal,
         cartItems: updateCartItems(cartItems, newItem, itemIndex)
     };
 };

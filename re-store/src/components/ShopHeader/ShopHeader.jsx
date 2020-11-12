@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 
 import './ShopHeader.css'
 
-const ShopHeader = ({ numItems, totalPrice }) => {
+const ShopHeader = ({ cartItems, totalPrice }) => {
+
+    const countItem = () => {
+        return cartItems.reduce((prevTotal, item) => {
+            return item.count + prevTotal
+        }, 0)
+    };
+
     return (
         <header className="shop-header row">
             <Link to="/">
@@ -13,16 +20,17 @@ const ShopHeader = ({ numItems, totalPrice }) => {
             <Link to="/cart">
                 <div className="shopping-cart">
                     <i className="cart-icon fa fa-shopping-cart" />
-                    {numItems} items (${totalPrice})
+                    {countItem()} items (${totalPrice})
             </div>
             </Link>
         </header>
     );
 };
 
-const mapStateToProps = ({ shoppingCart: { totalPrice } }) => {
+const mapStateToProps = ({ shoppingCart: { totalPrice, cartItems } }) => {
     return {
-        totalPrice
+        totalPrice,
+        cartItems
     }
 };
 

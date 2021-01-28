@@ -1,0 +1,9 @@
+.main-card {
+  box-shadow: 3px 3px 8px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.main-card > img {
+  border-radius: 1.3rem;
+  padding: 1rem;
+}

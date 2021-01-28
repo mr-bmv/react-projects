@@ -1,3 +1,15 @@
 # GITHUB SEARCH
 
-React project which based on hooks
+I've create this application for practice some new frameworks and libraries.
+There are next features in this application:
+- this application based on **React**;
+- **React-Router** was used for jumping between pages;
+- **useContext** and **useReducer** hooks were used for manage state;
+- application gets data from github using these **REST API**;
+- **Bootstrap** CSS-framework was used for style;
+- **Spinner** for loading process was generated on [https://loading.io/](https://loading.io/)
+- **propTypes** was used for prevents any issue with types in components
+
+
+## Last deploy
+https://6011af297a05f6b7250cd418--search-on-github.netlify.app

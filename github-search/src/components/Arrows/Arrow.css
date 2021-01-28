@@ -1,0 +1,4 @@
+.arrow-row > i:hover {
+  color: #b58900;
+  cursor: pointer;
+}

@@ -6,7 +6,7 @@ const About = () => {
       {/* image side */}
       <div className="col-lg-4 col-md-6 col-sm-12">
         <img
-          src={`https://avatars.githubusercontent.com/u/27474473?v=4`}
+          src={`https://avatars.githubusercontent.com/u/27474473?s=460&u=d73d5d14288ee3b50d16cedd69498b6af84c511c&v=4`}
           alt={"mr-bmv"}
           className="img-fluid rounded mt-3"
         />

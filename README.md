@@ -53,7 +53,7 @@ In Progress
 
 [More information about application](./github-search/README.md)
 
-[<img src="./img/github-search.png" width="600" height="560"/>](https://60129e02acbae7d8629f019b--search-on-github.netlify.app)
+[<img src="./img/github-search.png" width="600" height="560"/>](https://6012aa5a0d1e82f06e01c91d--search-on-github.netlify.app)
 
 ## redux structure
 

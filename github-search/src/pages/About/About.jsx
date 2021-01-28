@@ -15,7 +15,7 @@ const About = () => {
           <div className="col-sm-12">
             <ul className="list-group list-group-horizontal ul-cls">
               <a
-                href={'https://github.com/mr-bmv'}
+                href={'https://github.com/mr-bmv/react-projects'}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -63,6 +63,10 @@ const About = () => {
               </li>
               <li><span className="text-primary">propTypes</span> was used for prevents any issue with types in components</li>
             </ul>
+          </div>
+          <div className="text-success mb-1">
+            <i className="fa fa-github-square fa-lg mr-1" style={{ color: "black" }} />
+            <a href={`https://github.com/mr-bmv/react-projects/tree/master/github-search`} rel="noopener noreferrer" target="_blank">Github repository</a>
           </div>
           <div className="text-success"> <i className="fa fa-envelope fa-sm text-success mr-1" /> mr.m.botkin@gmail.com </div>
 

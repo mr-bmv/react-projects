@@ -1,6 +1,6 @@
 # GITHUB SEARCH
 
-[<img src="../img/github-search.png" width="800" height="660"/>](https://6011af297a05f6b7250cd418--search-on-github.netlify.app)
+[<img src="../img/github-search.png" width="800" height="660"/>](https://60129e02acbae7d8629f019b--search-on-github.netlify.app)
 
 I've create this application for practice some new frameworks and libraries. There are next features in this application:
 - this application based on **React**;
@@ -14,4 +14,4 @@ I've create this application for practice some new frameworks and libraries. The
 
 ## Last deploy
 
-[Link to Site](https://6011af297a05f6b7250cd418--search-on-github.netlify.app)
+[Link to Site](https://60129e02acbae7d8629f019b--search-on-github.netlify.app)

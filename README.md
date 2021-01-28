@@ -1,7 +1,8 @@
 # React Projects
 
-It is projects which I've created for practice some features of React. For now
-it's just two projects:
+I've create this application for practice some new frameworks and libraries.
+
+For now it's just two projects:
 
 - toDo List
 - Star Wars Database
@@ -12,7 +13,7 @@ it's just two projects:
   - [Quiz Application (complete)](#quiz-application-complete)
   - [toDo List Application (complete)](#todo-list-application-complete)
   - [todo-hooks Application (complete)](#todo-hooks-application-complete)
-  - [Star Wars Database Application (in progress)](#star-wars-database-application-in-progress)
+  - [Star Wars Database Application (complete)](#star-wars-database-application-complete)
   - [redux structure](#redux-structure)
 
 TODO
@@ -42,13 +43,15 @@ Hosting URL: https://react-quiz-37a08.web.app
 
 <img src="./img/todo-hooks.png" width="600" height="550"/>
 
-## Star Wars Database Application (in progress)
+## Star Wars Database Application (complete)
 
 [More information about application](./star-wars-database-api/README.md)
 
 <img src="./img/swapi_main_view.png" width="800" height="500"/>
 
-## redux structure 
+##
+
+## redux structure
 
 Main redux structure could be found in one [script](.\redux.js)
 

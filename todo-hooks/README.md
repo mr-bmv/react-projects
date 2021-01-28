@@ -1,10 +1,14 @@
 # ToDo App with Hooks
 
-<img src="../img/todo-hooks.png" width="600" height="550"/>
+[<img src="../img/todo-hooks.png" width="600" height="550"/>](https://601279a523448fad5d30c789--hooks-to-do-application.netlify.app)
 
 This application is made without class-based components. Main idea is to use only functional component and hooks to cover all functional.
 
 `useState`, `useContext` were used in this project.
+
+## Last Deploy
+
+[Site](https://601279a523448fad5d30c789--hooks-to-do-application.netlify.app)
 
 ## Functional
 
@@ -16,7 +20,7 @@ Task list could be filtered by using `"All"`/`"Closed"`/`"Active"`/`"Removed"` b
 
 ### Search Panel
 
-Task could be found by using `"Search Task"` input field. 
+Task could be found by using `"Search Task"` input field.
 Letter case doesn't matter for matching.
 
 ### Add new Task Panel
@@ -30,7 +34,7 @@ Any task could be:
 
 - deleted from main list by using **"Trash"** button im each task.
 
-- mark like closed or done by click on each title of task. If task marked like closer/done it have crossed out line through tasks title. 
+- mark like closed or done by click on each title of task. If task marked like closer/done it have crossed out line through tasks title.
 
 ### Clean Removed Tasks
 

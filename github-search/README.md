@@ -1,7 +1,8 @@
 # GITHUB SEARCH
 
-I've create this application for practice some new frameworks and libraries.
-There are next features in this application:
+[<img src="../img/github-search.png" width="800" height="660"/>](https://6011af297a05f6b7250cd418--search-on-github.netlify.app)
+
+I've create this application for practice some new frameworks and libraries. There are next features in this application:
 - this application based on **React**;
 - **React-Router** was used for jumping between pages;
 - **useContext** and **useReducer** hooks were used for manage state;
@@ -12,4 +13,5 @@ There are next features in this application:
 
 
 ## Last deploy
-https://6011af297a05f6b7250cd418--search-on-github.netlify.app
+
+[Link to Site](https://6011af297a05f6b7250cd418--search-on-github.netlify.app)

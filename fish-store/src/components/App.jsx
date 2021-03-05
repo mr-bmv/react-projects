@@ -120,8 +120,10 @@ export default class App extends Component {
             .map((fish) =>
                 <Fish
                     key={fish}
+                    item={fish}
                     details={this.state.fishes[fish]}
-                    addToCard={() => this.addToOrder(fish)}
+                    // addToCard={() => this.addToOrder(fish)}
+                    addToCard={this.addToOrder}
                 />);
 
         return (
